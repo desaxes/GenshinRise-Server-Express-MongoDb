@@ -31,4 +31,13 @@ export const rollService = {
     async createWeaponRoll(data: rollType) {
         return RollRepository.addWeaponRoll(data)
     },
+    async getStandartRollStatistic(){
+        return RollRepository.getStandartRollStatistic()
+    },
+    async getEventRollStatistic(){
+        return RollRepository.getEventRollStatistic()
+    },
+    async getWeaponRollStatistic(){
+        return RollRepository.getWeaponRollStatistic()
+    }
 }

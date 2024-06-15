@@ -1,4 +1,4 @@
-import express, { Response } from 'express'
+import express, { Request, Response } from 'express'
 import { RequestWithBody, RequestWithQuery } from '../api-types'
 import { StatusCodes } from '../StatusCodes'
 import { InsertOneResult } from 'mongodb'
@@ -75,6 +75,36 @@ export const rollRouter = () => {
             }
             catch (e) {
                 res.status(StatusCodes.BAD_REQUEST)
+            }
+        })
+    router.get('/standart/stat',
+        async (req: Request, res: Response<any>) => {
+            try {
+                let rolls = await rollService.getStandartRollStatistic()
+                res.json(rolls).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/event/stat',
+        async (req: Request, res: Response<any>) => {
+            try {
+                let rolls = await rollService.getEventRollStatistic()
+                res.json(rolls).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/weapon/stat',
+        async (req: Request, res: Response<any>) => {
+            try {
+                let rolls = await rollService.getWeaponRollStatistic()
+                res.json(rolls).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
             }
         })
     return router

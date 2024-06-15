@@ -10,6 +10,18 @@ export const RollRepository = {
             total: rollCounter
         }
     },
+    async getStandartRollStatistic() {
+        const rolls = await srollDb.aggregate([{ $group: { _id: { img: "$img", stars: "$stars", isChar: "$isChar" }, count: { $sum: 1 } } },{ $sort: { '_id.stars': -1 } }]).toArray()
+        return rolls
+    },
+    async getEventRollStatistic() {
+        const rolls = await erollDb.aggregate([{ $group: { _id: { img: "$img", stars: "$stars", isChar: "$isChar" }, count: { $sum: 1 } } },{ $sort: { '_id.stars': -1 } }]).toArray()
+        return rolls
+    },
+    async getWeaponRollStatistic() {
+        const rolls = await wrollDb.aggregate([{ $group: { _id: { img: "$img", stars: "$stars", isChar: "$isChar" }, count: { $sum: 1 } } },{ $sort: { '_id.stars': -1 } }]).toArray()
+        return rolls
+    },
     async addStandartRoll(data: rollType) {
         const rolls = await srollDb.find({}).toArray()
         let lastId = rolls.length > 0 ? rolls[rolls.length - 1].id + 1 : 1
@@ -21,7 +33,7 @@ export const RollRepository = {
             isChar: data.isChar,
             rewardId: +data.rewardId,
             rewardName: data.rewardName,
-            stars:+data.stars,
+            stars: +data.stars,
             img: data.img
         })
         return roll
@@ -45,7 +57,7 @@ export const RollRepository = {
             isChar: data.isChar,
             rewardId: data.rewardId,
             rewardName: data.rewardName,
-            stars:+data.stars,
+            stars: +data.stars,
             img: data.img
         })
         return roll
@@ -69,7 +81,7 @@ export const RollRepository = {
             isChar: data.isChar,
             rewardId: data.rewardId,
             rewardName: data.rewardName,
-            stars:+data.stars,
+            stars: +data.stars,
             img: data.img
         })
         return roll
