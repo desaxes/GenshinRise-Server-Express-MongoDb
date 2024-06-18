@@ -1,4 +1,4 @@
-import express, { Response } from 'express'
+import express, { Request, Response } from 'express'
 import { RequestWithBody, RequestWithParams, RequestWithQuery } from '../api-types'
 import { CharQueryModel } from '../models/CharQueryModel'
 import { StatusCodes } from '../StatusCodes'

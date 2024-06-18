@@ -12,6 +12,7 @@ import { weaponRiseRouter } from './routes/weapon-rise-router';
 import { weaponCollectionRouter } from './routes/weapon-collection-router';
 import { weaponLvlUpRouter } from './routes/weapon-lvlup-router';
 import { rollRouter } from './routes/roll-router';
+import { statisticRouter } from './routes/statistic-router';
 export const app = express()
 
 const jsonBodyMiddleware = express.json()
@@ -32,6 +33,7 @@ app.use("/weaponrise", weaponRiseRouter())
 app.use("/weaponcollection", weaponCollectionRouter())
 app.use("/weaponlvlup", weaponLvlUpRouter())
 app.use("/rolls", rollRouter())
+app.use("/stat", statisticRouter())
 
 
 

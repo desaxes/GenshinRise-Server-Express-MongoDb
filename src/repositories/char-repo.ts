@@ -181,5 +181,15 @@ export const charRepository = {
     },
     async removeMaxValues(id: string) {
         await maxDb.deleteOne({ id: +id })
+    },
+    async getCharStat() {
+        const charsElements = await charDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$weaponId" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const colElements = await colDb.aggregate([{ $group: { _id: { element: "$stoneTypeId" }, count: { $sum: 1 } } }]).toArray()
+        return {
+            elements: {
+                all: charsElements,
+                col: colElements
+            },
+        }
     }
 }
