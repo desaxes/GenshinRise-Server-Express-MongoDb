@@ -1,7 +1,9 @@
 export type RollQueryModel = {
-   page?:string,
-   limit?:string,
+   page?: string,
+   limit?: string,
    year?: string,
-   month?: string,
-   day?: string
+   lmonth?: string,
+   lday?: string
+   hmonth?: string,
+   hday?: string
 }

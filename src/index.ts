@@ -24,6 +24,7 @@ let ewmatDb: Collection
 let wrollDb: Collection
 let erollDb: Collection
 let srollDb: Collection
+let bannerDb: Collection
 
 (async () => {
     try {
@@ -48,6 +49,7 @@ let srollDb: Collection
         wrollDb = mongoClient.db("Genshin").collection('WeaponRolls')
         erollDb = mongoClient.db("Genshin").collection('EventRolls')
         srollDb = mongoClient.db("Genshin").collection('StandartRolls')
+        bannerDb = mongoClient.db("Genshin").collection('Banners')
         app.listen(port);
         console.log("Success");
     } catch (err) {
@@ -62,5 +64,5 @@ export {
     timersDb, maxDb, weaponDb,
     maxWeaponDb, wcolDb, wriseDb,
     wmatDb, ewmatDb, wrollDb,
-    erollDb, srollDb
+    erollDb, srollDb, bannerDb
 }

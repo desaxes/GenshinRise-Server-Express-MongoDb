@@ -41,6 +41,16 @@ export const rollRouter = () => {
                 res.sendStatus(500)
             }
         })
+    router.get('/event/banner',
+        async (req: RequestWithQuery<RollQueryModel>, res: Response<any>) => {
+            try {
+                let rolls = await rollService.getEventRollsForBanner(req.query)
+                res.json(rolls).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
     router.post('/event',
         async (req: RequestWithBody<rollType>, res: Response<InsertOneResult | { message: string }>) => {
             try {
