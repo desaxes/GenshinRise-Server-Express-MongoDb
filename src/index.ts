@@ -25,6 +25,35 @@ let wrollDb: Collection
 let erollDb: Collection
 let srollDb: Collection
 let bannerDb: Collection
+let honkaiCharDb:Collection
+let honkaiBossDb:Collection
+let honkaiEnemyDb:Collection
+let honkaiTalentDb:Collection
+let honkaiWBossDb:Collection
+let honkaiColDb:Collection
+let honkaiRiseDb:Collection
+let honkaiWcolDb:Collection
+let honkaiWriseDb:Collection
+let honkaiWeaponDb:Collection
+let honkaiWrollDb:Collection
+let honkaiErollDb:Collection
+let honkaiSrollDb:Collection
+let honkaiBannerDb:Collection
+let zzzCharDb:Collection
+let zzzBossDb:Collection
+let zzzEnemyDb:Collection
+let zzzTalentDb:Collection
+let zzzWBossDb:Collection
+let zzzColDb:Collection
+let zzzRiseDb:Collection
+let zzzWcolDb:Collection
+let zzzWriseDb:Collection
+let zzzWeaponDb:Collection
+let zzzWrollDb:Collection
+let zzzErollDb:Collection
+let zzzSrollDb:Collection
+let zzzBannerDb:Collection
+let zzzWmatDb:Collection
 
 (async () => {
     try {
@@ -50,6 +79,35 @@ let bannerDb: Collection
         erollDb = mongoClient.db("Genshin").collection('EventRolls')
         srollDb = mongoClient.db("Genshin").collection('StandartRolls')
         bannerDb = mongoClient.db("Genshin").collection('Banners')
+        honkaiCharDb = mongoClient.db("Honkai").collection('Characters')
+        honkaiBossDb = mongoClient.db("Genshin").collection('BossMaterials')
+        honkaiEnemyDb = mongoClient.db("Honkai").collection('EnemyMaterials')
+        honkaiTalentDb = mongoClient.db("Honkai").collection('TalentMaterials')
+        honkaiWBossDb = mongoClient.db("Honkai").collection('WeekBossMaterials')
+        honkaiColDb = mongoClient.db("Honkai").collection('Collection')
+        honkaiRiseDb = mongoClient.db("Honkai").collection('Rising')
+        honkaiWcolDb = mongoClient.db("Honkai").collection('WeaponCollection')
+        honkaiWriseDb = mongoClient.db("Honkai").collection('WeaponRising')
+        honkaiWeaponDb = mongoClient.db("Honkai").collection('Weapons')
+        honkaiWrollDb = mongoClient.db("Honkai").collection('WeaponRolls')
+        honkaiErollDb = mongoClient.db("Honkai").collection('EventRolls')
+        honkaiSrollDb = mongoClient.db("Honkai").collection('StandartRolls')
+        honkaiBannerDb = mongoClient.db("Honkai").collection('Banners')
+        zzzCharDb = mongoClient.db("ZZZ").collection('Characters')
+        zzzBossDb = mongoClient.db("ZZZ").collection('BossMaterials')
+        zzzEnemyDb = mongoClient.db("ZZZ").collection('EnemyMaterials')
+        zzzTalentDb = mongoClient.db("ZZZ").collection('TalentMaterials')
+        zzzWBossDb = mongoClient.db("ZZZ").collection('WeekBossMaterials')
+        zzzColDb = mongoClient.db("ZZZ").collection('Collection')
+        zzzRiseDb = mongoClient.db("ZZZ").collection('Rising')
+        zzzWcolDb = mongoClient.db("ZZZ").collection('WeaponCollection')
+        zzzWriseDb = mongoClient.db("ZZZ").collection('WeaponRising')
+        zzzWeaponDb = mongoClient.db("ZZZ").collection('Weapons')
+        zzzWrollDb = mongoClient.db("ZZZ").collection('WeaponRolls')
+        zzzErollDb = mongoClient.db("ZZZ").collection('EventRolls')
+        zzzSrollDb = mongoClient.db("ZZZ").collection('StandartRolls')
+        zzzBannerDb = mongoClient.db("ZZZ").collection('Banners')
+        zzzWmatDb = mongoClient.db("ZZZ").collection('WeaponMaterials')
         app.listen(port);
         console.log("Success");
     } catch (err) {
@@ -64,5 +122,33 @@ export {
     timersDb, maxDb, weaponDb,
     maxWeaponDb, wcolDb, wriseDb,
     wmatDb, ewmatDb, wrollDb,
-    erollDb, srollDb, bannerDb
+    erollDb, srollDb, bannerDb,honkaiCharDb,
+    honkaiBossDb,
+    honkaiEnemyDb,
+    honkaiTalentDb,
+    honkaiWBossDb,
+    honkaiColDb,
+    honkaiRiseDb,
+    honkaiWcolDb,
+    honkaiWriseDb,
+    honkaiWeaponDb,
+    honkaiWrollDb,
+    honkaiErollDb,
+    honkaiSrollDb,
+    honkaiBannerDb,
+    zzzCharDb,
+    zzzBossDb,
+    zzzEnemyDb,
+    zzzTalentDb,
+    zzzWBossDb,
+    zzzColDb,
+    zzzRiseDb,
+    zzzWcolDb,
+    zzzWriseDb,
+    zzzWeaponDb,
+    zzzWrollDb,
+    zzzErollDb,
+    zzzSrollDb,
+    zzzBannerDb,
+    zzzWmatDb
 }
