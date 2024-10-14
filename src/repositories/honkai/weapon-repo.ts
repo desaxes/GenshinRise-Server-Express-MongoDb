@@ -1,30 +1,31 @@
-import { maxWeaponDb, wcolDb, weaponDb, wriseDb, zzzWcolDb, zzzWeaponDb, zzzWriseDb } from '../..'
+import { honkaiWcolDb, honkaiWeaponDb, honkaiWriseDb, maxWeaponDb, wcolDb, weaponDb, wriseDb, zzzWcolDb, zzzWeaponDb, zzzWriseDb } from '../..'
 import { newWeapon, updateWeapon, weaponType } from '../../types'
 import path from 'path'
 
-export const zzzWeaponRepository = {
+export const honkaiWeaponRepository = {
     async getWeapons(finalConditions: any, limit: number, offset: number) {
-        const weaponCounter = (await zzzWeaponDb.find<newWeapon>(finalConditions).toArray()).length
-        const weapons = await zzzWeaponDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        const weaponCounter = (await honkaiWeaponDb.find<newWeapon>(finalConditions).toArray()).length
+        const weapons = await honkaiWeaponDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
             weapons: weapons,
             total: weaponCounter
         }
     },
     async getWeaponById(id: string) {
-        const weapon = await zzzWeaponDb.findOne<newWeapon | null>({ id: parseInt(id) })
+        const weapon = await honkaiWeaponDb.findOne<newWeapon | null>({ id: parseInt(id) })
         return weapon
     },
-    async createWeapon(data: weaponType, files: any) {
-        const weapons = await zzzWeaponDb.find({}).toArray()
+    async createWeapon(data: any, files: any) {
+        const weapons = await honkaiWeaponDb.find({}).toArray()
         let lastId = weapons.length > 0 ? weapons[weapons.length - 1].id + 1 : 1
         if (files) {
             let fileName = files.img.name
-            files.img.mv(path.resolve(__dirname, '../..', 'static/zzz/weapons', fileName))
-            const newWeapon = await zzzWeaponDb.insertOne(
+            files.img.mv(path.resolve(__dirname, '../..', 'static/honkai/weapons', fileName))
+            const newWeapon = await honkaiWeaponDb.insertOne(
                 {
                     id: lastId,
                     name: data.name,
+                    enemyMaterialId: +data.enemyMaterialId,
                     weaponMaterialId: +data.weaponMaterialId,
                     img: fileName,
                     stars: +data.stars
@@ -36,8 +37,8 @@ export const zzzWeaponRepository = {
         }
     },
     async getWeaponsFromCol(finalConditions: any, limit: number, offset: number) {
-        const weaponsCounter = (await zzzWcolDb.find<newWeapon>(finalConditions).toArray()).length
-        const weapons = await zzzWcolDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        const weaponsCounter = (await honkaiWcolDb.find<newWeapon>(finalConditions).toArray()).length
+        const weapons = await honkaiWcolDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
 
         return {
             weapons: weapons,
@@ -45,13 +46,13 @@ export const zzzWeaponRepository = {
         }
     },
     async getWeaponByIdFromCol(id: string) {
-        const weapon = await zzzWcolDb.findOne<newWeapon | null>({ id: parseInt(id) })
+        const weapon = await honkaiWcolDb.findOne<newWeapon | null>({ id: parseInt(id) })
         return weapon
     },
     async addWeaponToCol(data: newWeapon) {
-        const dublicate = await zzzWcolDb.findOne({ id: data.id })
+        const dublicate = await honkaiWcolDb.findOne({ id: data.id })
         if (!dublicate) {
-            const newWeapon = await zzzWcolDb.insertOne(data)
+            const newWeapon = await honkaiWcolDb.insertOne(data)
             return newWeapon
         }
         else {
@@ -59,18 +60,18 @@ export const zzzWeaponRepository = {
         }
     },
     async getWeaponsFromRise(finalConditions: any, limit: number, offset: number) {
-        const weaponCounter = (await zzzWriseDb.find<newWeapon>(finalConditions).toArray()).length
-        const weapons = await zzzWriseDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        const weaponCounter = (await honkaiWriseDb.find<newWeapon>(finalConditions).toArray()).length
+        const weapons = await honkaiWriseDb.find<newWeapon>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
             weapons: weapons,
             total: weaponCounter
         }
     },
     async getWeaponByIdFromRise(id: string) {
-        const weapon = await zzzWriseDb.findOne<newWeapon | null>({ id: parseInt(id) })
+        const weapon = await honkaiWriseDb.findOne<newWeapon | null>({ id: parseInt(id) })
         return weapon
     },
-    async addWeaponToRise(data: newWeapon) {
+    async addWeaponToRise(data: any) {
         const dublicate = await zzzWriseDb.findOne({ id: data.id })
         if (!dublicate) {
             const newWeapon = await zzzWriseDb.insertOne({
@@ -79,9 +80,13 @@ export const zzzWeaponRepository = {
                 img: data.img,
                 stars: +data.stars,
                 weaponMaterialId: +data.weaponMaterialId,
+                enemyMaterialId: +data.enemyMaterialId,
                 weaponMat1Count: 0,
                 weaponMat2Count: 0,
                 weaponMat3Count: 0,
+                enemyWMat1Count: 0,
+                enemyWMat2Count: 0,
+                enemyWMat3Count: 0
             })
             return newWeapon
         }
@@ -90,21 +95,24 @@ export const zzzWeaponRepository = {
         }
     },
     async updateWeaponRise(data: updateWeapon) {
-        const updated = await zzzWriseDb.updateOne({ id: +data.id },
+        const updated = await honkaiWriseDb.updateOne({ id: +data.id },
             {
                 $set: {
                     weaponMat1Count: +data.wmat1,
                     weaponMat2Count: +data.wmat2,
                     weaponMat3Count: +data.wmat3,
+                    enemyMat1Count: +data.emat1,
+                    enemyMat2Count: +data.emat2,
+                    enemyMat3Count: +data.emat3,
                 }
             }
         )
         return updated
     },
     async removeWeaponfromCol(id: string) {
-        await zzzWcolDb.deleteOne({ id: +id })
+        await honkaiWcolDb.deleteOne({ id: +id })
     },
     async removeWeaponfromRise(id: string) {
-        await zzzWriseDb.deleteOne({ id: +id })
+        await honkaiWriseDb.deleteOne({ id: +id })
     },
 }

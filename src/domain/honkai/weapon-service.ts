@@ -1,57 +1,56 @@
 import { FileArray } from 'express-fileupload'
 import { setQueryConditionsForWeapons } from '../../functions'
-import {newWeapon, updateWeapon, weaponType } from '../../types'
+import { newWeapon, updateWeapon, weaponType } from '../../types'
 import { WeaponQueryModel } from '../../models/WeaponQueryModel'
-import { weaponRepository } from '../../repositories/genshin/weapon-repo'
-import { zzzWeaponRepository } from '../../repositories/zzz/weapon-repo'
+import { honkaiWeaponRepository } from '../../repositories/honkai/weapon-repo'
 
-export const zzzWeaponService = {
+export const honkaiWeaponService = {
     // Добавление оружия в базу
     async getWeapons(query: any) {
         let lim = query.limit || 5
         let offset = (query.page ? +query.page : 1) * +lim - +lim
         let finalConditions = setQueryConditionsForWeapons(query)
-        return await zzzWeaponRepository.getWeapons(finalConditions, +lim, offset)
+        return await honkaiWeaponRepository.getWeapons(finalConditions, +lim, offset)
     },
     async getWeaponById(id: string) {
-        return zzzWeaponRepository.getWeaponById(id)
+        return honkaiWeaponRepository.getWeaponById(id)
     },
     async createWeapon(data: weaponType, files: FileArray | null | undefined) {
-        return zzzWeaponRepository.createWeapon(data, files)
+        return honkaiWeaponRepository.createWeapon(data, files)
     },
     // Добавление оружия в коллекцию
     async getWeaponsFromCol(query: WeaponQueryModel) {
         let lim = query.limit || 5
         let offset = (query.page ? +query.page : 1) * +lim - +lim
         let finalConditions = setQueryConditionsForWeapons(query)
-        return await zzzWeaponRepository.getWeaponsFromCol(finalConditions, +lim, offset)
+        return await honkaiWeaponRepository.getWeaponsFromCol(finalConditions, +lim, offset)
     },
     async getWeaponFromColById(id: string) {
-        return zzzWeaponRepository.getWeaponByIdFromCol(id)
+        return honkaiWeaponRepository.getWeaponByIdFromCol(id)
     },
     async addWeaponToCol(data: newWeapon) {
-        return zzzWeaponRepository.addWeaponToCol(data)
+        return honkaiWeaponRepository.addWeaponToCol(data)
     },
     // Добавление оружия в прокачку
     async getWeaponsFromRise(query: WeaponQueryModel) {
         let lim = query.limit || 5
         let offset = (query.page ? +query.page : 1) * +lim - +lim
         let finalConditions = setQueryConditionsForWeapons(query)
-        return await zzzWeaponRepository.getWeaponsFromRise(finalConditions, +lim, offset)
+        return await honkaiWeaponRepository.getWeaponsFromRise(finalConditions, +lim, offset)
     },
     async getWeaponByIdFromRise(id: string) {
-        return zzzWeaponRepository.getWeaponByIdFromRise(id)
+        return honkaiWeaponRepository.getWeaponByIdFromRise(id)
     },
     async addWeaponToRise(data: newWeapon) {
-        return zzzWeaponRepository.addWeaponToRise(data)
+        return honkaiWeaponRepository.addWeaponToRise(data)
     },
     async updateWeaponToRise(data: updateWeapon) {
-        return zzzWeaponRepository.updateWeaponRise(data)
+        return honkaiWeaponRepository.updateWeaponRise(data)
     },
     async removeWeaponFromCol(id: string) {
-        return zzzWeaponRepository.removeWeaponfromCol(id)
+        return honkaiWeaponRepository.removeWeaponfromCol(id)
     },
     async removeWeaponFromRise(id: string) {
-        return zzzWeaponRepository.removeWeaponfromRise(id)
+        return honkaiWeaponRepository.removeWeaponfromRise(id)
     }
 }
