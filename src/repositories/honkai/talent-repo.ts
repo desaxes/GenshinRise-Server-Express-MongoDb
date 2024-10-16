@@ -2,7 +2,7 @@ import { honkaiTalentDb, talentDb, zzzTalentDb } from '../..'
 import path from 'path'
 
 export const honkaiTalentRepository = {
-    async createTalent(name: string, days: number, files: any) {
+    async createTalent(name: string, days: number, pathId: number, files: any) {
         const talents = await honkaiTalentDb.find({}).toArray()
         let lastId = talents.length > 0 ? talents[talents.length - 1].id + 1 : 1
         if (files.img1 && files.img2 && files.img3) {
@@ -16,6 +16,7 @@ export const honkaiTalentRepository = {
                 {
                     id: lastId,
                     name: name,
+                    pathId: pathId,
                     img1: fileName1,
                     img2: fileName2,
                     img3: fileName3,

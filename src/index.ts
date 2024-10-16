@@ -80,7 +80,7 @@ let zzzWmatDb:Collection
         srollDb = mongoClient.db("Genshin").collection('StandartRolls')
         bannerDb = mongoClient.db("Genshin").collection('Banners')
         honkaiCharDb = mongoClient.db("Honkai").collection('Characters')
-        honkaiBossDb = mongoClient.db("Genshin").collection('BossMaterials')
+        honkaiBossDb = mongoClient.db("Honkai").collection('BossMaterials')
         honkaiEnemyDb = mongoClient.db("Honkai").collection('EnemyMaterials')
         honkaiTalentDb = mongoClient.db("Honkai").collection('TalentMaterials')
         honkaiWBossDb = mongoClient.db("Honkai").collection('WeekBossMaterials')

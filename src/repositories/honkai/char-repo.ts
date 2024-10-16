@@ -15,7 +15,7 @@ export const honkaiCharRepository = {
         const char = await honkaiCharDb.findOne<newChar | null>({ id: parseInt(id) })
         return char
     },
-    async createChar(data: char, files: any) {
+    async createChar(data: any, files: any) {
         const chars = await honkaiCharDb.find({}).toArray()
         let lastId = chars.length > 0 ? chars[chars.length - 1].id + 1 : 1
         if (files) {
@@ -25,10 +25,12 @@ export const honkaiCharRepository = {
                 {
                     id: lastId,
                     name: data.name,
+                    stoneTypeId: +data.stoneTypeId,
                     enemyMaterialId: +data.enemyMaterialId,
                     bossMaterialId: +data.bossMaterialId,
                     talentMaterialId: +data.talentMaterialId,
                     weekBossMaterialId: +data.weekBossMaterialId,
+                    pathId: +data.pathId,
                     img: fileName,
                     region: +data.region,
                     sex: +data.sex,
@@ -126,9 +128,9 @@ export const honkaiCharRepository = {
         await honkaiRiseDb.deleteOne({ id: +id })
     },
     async getCharStat() {
-        const charsElements = await honkaiCharDb.aggregate([{ $group: { _id: { element: "$talentMaterialId", weaponId: "$enemyMaterialId" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const charsElements = await honkaiCharDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$pathId" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
         const charsRegions = await honkaiCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
-        const colElements = await honkaiColDb.aggregate([{ $group: { _id: { element: "$talentMaterialId" }, count: { $sum: 1 } } }]).toArray()
+        const colElements = await honkaiColDb.aggregate([{ $group: { _id: { element: "$stoneTypeId" }, count: { $sum: 1 } } }]).toArray()
         return {
             elements: {
                 all: charsElements,

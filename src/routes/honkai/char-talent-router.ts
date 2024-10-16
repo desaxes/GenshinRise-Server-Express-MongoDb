@@ -48,10 +48,10 @@ export const honkaiCharTalentRouter = () => {
             }
         })
     router.post('/book',
-        async (req: RequestWithBody<{ name: string, days: string }>, res: Response<InsertOneResult | { message: string }>) => {
+        async (req: RequestWithBody<{ name: string, days: string, pathId: string }>, res: Response<InsertOneResult | { message: string }>) => {
             try {
                 let files = req.files
-                const newTalent = await honkaiTalentService.createTalent(req.body.name, +req.body.days, files)
+                const newTalent = await honkaiTalentService.createTalent(req.body.name, +req.body.days, +req.body.pathId, files)
                 if (newTalent) { res.status(StatusCodes.CREATED).json(newTalent) }
                 else {
                     res.status(StatusCodes.BAD_REQUEST).json({ message: 'error' })

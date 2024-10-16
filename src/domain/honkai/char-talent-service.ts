@@ -15,8 +15,8 @@ export const honkaiTalentService = {
     async getWBMaterialById(id: string) {
         return honkaiWBRepository.getWBMaterialById(id)
     },
-    async createTalent(name: string, days: number, files: FileArray | null | undefined) {
-        return honkaiTalentRepository.createTalent(name, days, files)
+    async createTalent(name: string, days: number, pathId: number, files: FileArray | null | undefined) {
+        return honkaiTalentRepository.createTalent(name, days, pathId, files)
     },
     async createWBMaterial(name: string, files: FileArray | null | undefined) {
         return honkaiWBRepository.createMaterial(name, files)

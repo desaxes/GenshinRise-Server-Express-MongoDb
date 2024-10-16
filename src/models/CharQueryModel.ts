@@ -21,5 +21,6 @@ export type CharQueryModel = {
    region?:number,
    sex?:number,
    stars?:number,
-   size?:number
+   size?:number,
+   pathId?:number
 }

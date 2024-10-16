@@ -27,6 +27,9 @@ export const setQueryConditions = (query: CharQueryModel) => {
     if (query.weaponId) {
         conditions.push({ weaponId: +query.weaponId })
     }
+    if (query.pathId) {
+        conditions.push({ pathId: +query.pathId })
+    }
     if (query.region) {
         conditions.push({ region: +query.region })
     }
@@ -63,7 +66,7 @@ export const setQueryConditionsForWeapons = (query: WeaponQueryModel) => {
     }
     return conditions.length ? { $and: conditions } : {}
 }
-export const setQueryForRolls = (query: RollQueryModel) => {
+export const setQueryForRolls = (query: any) => {
     let conditions = []
     if (query.year) {
         conditions.push({ year: +query.year })
