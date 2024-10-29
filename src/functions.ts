@@ -58,6 +58,9 @@ export const setQueryConditionsForWeapons = (query: WeaponQueryModel) => {
     if (query.weaponMaterialId) {
         conditions.push({ weaponMaterialId: +query.weaponMaterialId })
     }
+    if(query.pathId){
+        conditions.push({pathId:+query.pathId})
+    }
     if (query.weaponId) {
         conditions.push({ weaponId: +query.weaponId })
     }

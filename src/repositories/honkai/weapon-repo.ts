@@ -27,6 +27,7 @@ export const honkaiWeaponRepository = {
                     name: data.name,
                     enemyMaterialId: +data.enemyMaterialId,
                     weaponMaterialId: +data.weaponMaterialId,
+                    pathId: +data.pathId,
                     img: fileName,
                     stars: +data.stars
                 })
@@ -72,9 +73,9 @@ export const honkaiWeaponRepository = {
         return weapon
     },
     async addWeaponToRise(data: any) {
-        const dublicate = await zzzWriseDb.findOne({ id: data.id })
+        const dublicate = await honkaiWriseDb.findOne({ id: data.id })
         if (!dublicate) {
-            const newWeapon = await zzzWriseDb.insertOne({
+            const newWeapon = await honkaiWriseDb.insertOne({
                 id: data.id,
                 name: data.name,
                 img: data.img,
@@ -84,9 +85,9 @@ export const honkaiWeaponRepository = {
                 weaponMat1Count: 0,
                 weaponMat2Count: 0,
                 weaponMat3Count: 0,
-                enemyWMat1Count: 0,
-                enemyWMat2Count: 0,
-                enemyWMat3Count: 0
+                enemyMat1Count: 0,
+                enemyMat2Count: 0,
+                enemyMat3Count: 0
             })
             return newWeapon
         }

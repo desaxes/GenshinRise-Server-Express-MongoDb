@@ -7,4 +7,5 @@ export type WeaponQueryModel = {
    weaponMaterialId?: number,
    weaponId?: number,
    stars?: number,
+   pathId?: number
 }
