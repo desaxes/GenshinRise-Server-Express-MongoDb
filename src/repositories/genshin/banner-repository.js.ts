@@ -16,12 +16,14 @@ export const BannerRepository = {
     async addBanner(data: any, files: any) {
         const banners = await bannerDb.find({}).toArray()
         let lastId = banners.length > 0 ? banners[banners.length - 1].id + 1 : 1
-        if (files.img1 && files.img2) {
+        if (files.img1) {
             let fileName1 = files.img1.name
-            let fileName2 = files.img2.name
+            let fileName2 = ''
+            if (files.img2) {
+                fileName2 = files.img2.name
+                files.img2.mv(path.resolve(__dirname, '../..', 'static/bannerImgs', fileName2))
+            }
             files.img1.mv(path.resolve(__dirname, '../..', 'static/bannerImgs', fileName1))
-            files.img2.mv(path.resolve(__dirname, '../..', 'static/bannerImgs', fileName2))
-            console.log(data)
             const banner = await bannerDb.insertOne({
                 id: lastId,
                 year: +data.year,
