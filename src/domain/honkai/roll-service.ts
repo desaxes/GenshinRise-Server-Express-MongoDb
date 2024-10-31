@@ -25,6 +25,12 @@ export const honkaiRollService = {
         let finalConditions = setQueryConditions(query)
         return await honkaiRollRepository.getEventRollsForBanner(finalConditions, +lim, offset, +query.year, +query.lmonth, +query.lday, +query.hmonth, +query.hday)
     },
+    async getWeaponRollsForBanner(query: any) {
+        let lim = query.limit || 10
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await honkaiRollRepository.getWeaponRollsForBanner(finalConditions, +lim, offset, +query.year, +query.lmonth, +query.lday, +query.hmonth, +query.hday)
+    },
     async createEventRoll(data: rollType) {
         return honkaiRollRepository.addEventRoll(data)
     },

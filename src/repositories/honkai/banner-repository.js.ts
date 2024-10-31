@@ -3,7 +3,7 @@ import { honkaiBannerDb } from "../.."
 
 export const honkaiBannerRepository = {
     async getAllBanners(limit: number, offset: number) {
-        const banners = await honkaiBannerDb.find().sort({ year: -1, lmonth: -1, lday: -1 }).skip(offset).limit(limit).toArray()
+        const banners = await honkaiBannerDb.find().sort({ year: 1, lmonth: 1, lday: 1 }).skip(offset).limit(limit).toArray()
         return {
             banners: banners
         }

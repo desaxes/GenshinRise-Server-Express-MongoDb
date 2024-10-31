@@ -127,6 +127,33 @@ export const honkaiRollRepository = {
             total: sortCounter.length
         }
     },
+    async getWeaponRollsForBanner(finalConditions: any, limit: number, offset: number, year: number, lmonth: number, lday: number, hmonth: number, hday: number) {
+        // const rollCounter = (await erollDb.find<newRollType>(finalConditions).toArray()).length
+        const rolls = await honkaiWrollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        const rollCounter = await honkaiWrollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [3, 4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        let sort
+        let sortCounter
+        if (lmonth === hmonth) {
+            sort = rolls.filter(e => e.day >= lday && e.day <= hday)
+        }
+        else {
+            const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday)
+            const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday)
+            sort = rolls1.concat(rolls2)
+        }
+        if (lmonth === hmonth) {
+            sortCounter = rollCounter.filter(e => e.day >= lday && e.day <= hday)
+        }
+        else {
+            const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday)
+            const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday)
+            sortCounter = rolls1.concat(rolls2)
+        }
+        return {
+            rolls: sort,
+            total: sortCounter.length
+        }
+    },
     async addEventRoll(data: rollType) {
         const rolls = await honkaiErollDb.find({}).toArray()
         let lastId = rolls.length > 0 ? rolls[rolls.length - 1].id + 1 : 1

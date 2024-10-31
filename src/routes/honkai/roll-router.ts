@@ -51,6 +51,16 @@ export const honkaiRollRouter = () => {
                 res.sendStatus(500)
             }
         })
+    router.get('/weapon/banner',
+        async (req: RequestWithQuery<RollQueryModel>, res: Response<any>) => {
+            try {
+                let rolls = await honkaiRollService.getWeaponRollsForBanner(req.query)
+                res.json(rolls).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
     router.post('/event',
         async (req: RequestWithBody<rollType>, res: Response<InsertOneResult | { message: string }>) => {
             try {

@@ -4,7 +4,7 @@ import { newRollType, rollType } from "../../types"
 
 export const BannerRepository = {
     async getAllBanners(limit: number, offset: number) {
-        const banners = await bannerDb.find().sort({ year: -1, lmonth: -1, lday: -1 }).skip(offset).limit(limit).toArray()
+        const banners = await bannerDb.find().sort({ year: 1, lmonth: 1, lday: 1 }).skip(offset).limit(limit).toArray()
         return {
             banners: banners
         }
