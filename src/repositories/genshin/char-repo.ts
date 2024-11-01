@@ -195,5 +195,16 @@ export const charRepository = {
                 all: charsRegions
             }
         }
+    },
+    async updateCharInfo(data: { id: number, ownWeaponId: number, info: string }) {
+        const updated = await charDb.updateOne({ id: +data.id },
+            {
+                $set: {
+                    ownWeaponId: +data.ownWeaponId,
+                    info: data.info
+                }
+            }
+        )
+        return updated
     }
 }

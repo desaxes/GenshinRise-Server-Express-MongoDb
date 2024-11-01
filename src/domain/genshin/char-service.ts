@@ -62,7 +62,10 @@ export const characterService = {
     async removeMaxValues(id: string) {
         return charRepository.removeMaxValues(id)
     },
-    async getCharStat(){
+    async getCharStat() {
         return charRepository.getCharStat()
+    },
+    async updateCharInfo(data: { id: number, ownWeaponId: number, info: string }) {
+        return charRepository.updateCharInfo(data)
     }
 }

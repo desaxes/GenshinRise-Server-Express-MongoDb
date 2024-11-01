@@ -1,7 +1,6 @@
 import express, { Response } from 'express'
 import { RequestWithBody, RequestWithParams, RequestWithQuery } from '../../api-types'
 import { StatusCodes } from '../../StatusCodes'
-import { characterService } from '../../domain/genshin/char-service'
 import { InsertOneResult } from 'mongodb'
 import { newChar } from '../../types'
 import { URIParamsModel } from '../../models/URIParamsModel'
