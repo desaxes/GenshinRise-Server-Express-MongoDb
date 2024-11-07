@@ -25,35 +25,38 @@ let wrollDb: Collection
 let erollDb: Collection
 let srollDb: Collection
 let bannerDb: Collection
-let honkaiCharDb:Collection
-let honkaiBossDb:Collection
-let honkaiEnemyDb:Collection
-let honkaiTalentDb:Collection
-let honkaiWBossDb:Collection
-let honkaiColDb:Collection
-let honkaiRiseDb:Collection
-let honkaiWcolDb:Collection
-let honkaiWriseDb:Collection
-let honkaiWeaponDb:Collection
-let honkaiWrollDb:Collection
-let honkaiErollDb:Collection
-let honkaiSrollDb:Collection
-let honkaiBannerDb:Collection
-let zzzCharDb:Collection
-let zzzBossDb:Collection
-let zzzEnemyDb:Collection
-let zzzTalentDb:Collection
-let zzzWBossDb:Collection
-let zzzColDb:Collection
-let zzzRiseDb:Collection
-let zzzWcolDb:Collection
-let zzzWriseDb:Collection
-let zzzWeaponDb:Collection
-let zzzWrollDb:Collection
-let zzzErollDb:Collection
-let zzzSrollDb:Collection
-let zzzBannerDb:Collection
-let zzzWmatDb:Collection
+let gemsDb: Collection
+let honkaiCharDb: Collection
+let honkaiBossDb: Collection
+let honkaiEnemyDb: Collection
+let honkaiTalentDb: Collection
+let honkaiWBossDb: Collection
+let honkaiColDb: Collection
+let honkaiRiseDb: Collection
+let honkaiWcolDb: Collection
+let honkaiWriseDb: Collection
+let honkaiWeaponDb: Collection
+let honkaiWrollDb: Collection
+let honkaiErollDb: Collection
+let honkaiSrollDb: Collection
+let honkaiBannerDb: Collection
+let honkaiGemsDb: Collection
+let zzzCharDb: Collection
+let zzzBossDb: Collection
+let zzzEnemyDb: Collection
+let zzzTalentDb: Collection
+let zzzWBossDb: Collection
+let zzzColDb: Collection
+let zzzRiseDb: Collection
+let zzzWcolDb: Collection
+let zzzWriseDb: Collection
+let zzzWeaponDb: Collection
+let zzzWrollDb: Collection
+let zzzErollDb: Collection
+let zzzSrollDb: Collection
+let zzzBannerDb: Collection
+let zzzWmatDb: Collection
+let zzzGemsDb: Collection
 
 (async () => {
     try {
@@ -79,6 +82,7 @@ let zzzWmatDb:Collection
         erollDb = mongoClient.db("Genshin").collection('EventRolls')
         srollDb = mongoClient.db("Genshin").collection('StandartRolls')
         bannerDb = mongoClient.db("Genshin").collection('Banners')
+        gemsDb = mongoClient.db("Genshin").collection('Gems')
         honkaiCharDb = mongoClient.db("Honkai").collection('Characters')
         honkaiBossDb = mongoClient.db("Honkai").collection('BossMaterials')
         honkaiEnemyDb = mongoClient.db("Honkai").collection('EnemyMaterials')
@@ -93,6 +97,7 @@ let zzzWmatDb:Collection
         honkaiErollDb = mongoClient.db("Honkai").collection('EventRolls')
         honkaiSrollDb = mongoClient.db("Honkai").collection('StandartRolls')
         honkaiBannerDb = mongoClient.db("Honkai").collection('Banners')
+        honkaiGemsDb = mongoClient.db("Honkai").collection('Gems')
         zzzCharDb = mongoClient.db("ZZZ").collection('Characters')
         zzzBossDb = mongoClient.db("ZZZ").collection('BossMaterials')
         zzzEnemyDb = mongoClient.db("ZZZ").collection('EnemyMaterials')
@@ -108,6 +113,7 @@ let zzzWmatDb:Collection
         zzzSrollDb = mongoClient.db("ZZZ").collection('StandartRolls')
         zzzBannerDb = mongoClient.db("ZZZ").collection('Banners')
         zzzWmatDb = mongoClient.db("ZZZ").collection('WeaponMaterials')
+        zzzGemsDb = mongoClient.db("ZZZ").collection('Gems')
         app.listen(port);
         console.log("Success");
     } catch (err) {
@@ -122,7 +128,8 @@ export {
     timersDb, maxDb, weaponDb,
     maxWeaponDb, wcolDb, wriseDb,
     wmatDb, ewmatDb, wrollDb,
-    erollDb, srollDb, bannerDb,honkaiCharDb,
+    erollDb, srollDb, bannerDb, gemsDb,
+    honkaiCharDb,
     honkaiBossDb,
     honkaiEnemyDb,
     honkaiTalentDb,
@@ -136,6 +143,7 @@ export {
     honkaiErollDb,
     honkaiSrollDb,
     honkaiBannerDb,
+    honkaiGemsDb,
     zzzCharDb,
     zzzBossDb,
     zzzEnemyDb,
@@ -150,5 +158,6 @@ export {
     zzzErollDb,
     zzzSrollDb,
     zzzBannerDb,
-    zzzWmatDb
+    zzzWmatDb,
+    zzzGemsDb
 }
