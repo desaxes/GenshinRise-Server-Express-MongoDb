@@ -20,5 +20,14 @@ export const zzzGemsRouter = () => {
             res.sendStatus(500)
         }
     })
+    router.get('/all', async (req, res) => {
+        try {
+            let rows = await zzzGemsService.getAllRows()
+            res.json(rows).status(200)
+        }
+        catch (e) {
+            res.sendStatus(500)
+        }
+    })
     return router
 }

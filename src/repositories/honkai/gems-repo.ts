@@ -5,6 +5,10 @@ export const honkaiGemsRepo = {
         const rows = await honkaiGemsDb.find().toArray()
         return rows[rows.length - 31] ? rows.slice(rows.length - 31) : rows
     },
+    async getAllRows() {
+        const rows = await honkaiGemsDb.find().toArray()
+        return rows
+    },
     async addRow(data: any) {
         const rows = await honkaiGemsDb.find({}).toArray()
         const lastRow = rows[rows.length - 1]
@@ -13,8 +17,8 @@ export const honkaiGemsRepo = {
         const wRolls = await honkaiWrollDb.find({ year: +data.year, month: +data.month, day: +data.day }).toArray()
         let expense = (eRolls.length + wRolls.length) * 160
         const income = expense -
-            (lastRow ? (lastRow.gems + (Math.floor(lastRow.cash / 5)) * 160 + lastRow.rolls * 160) : 0) +
-            (data.gems + (Math.floor(data.cash / 5)) * 160 + data.rolls * 160)
+            (lastRow ? (lastRow.gems + (Math.floor(lastRow.cash / 20)) * 160 + lastRow.rolls * 160) : 0) +
+            (data.gems + (Math.floor(data.cash / 20)) * 160 + data.rolls * 160)
         const row = await honkaiGemsDb.insertOne({
             id: +lastId,
             year: +data.year,
@@ -24,7 +28,8 @@ export const honkaiGemsRepo = {
             rolls: +data.rolls,
             cash: +data.cash,
             income: +income,
-            expense: +expense
+            expense: +expense,
+            com:data.com
         })
         return row
     }

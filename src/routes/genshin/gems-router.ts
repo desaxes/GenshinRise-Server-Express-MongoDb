@@ -20,5 +20,14 @@ export const gemsRouter = () => {
             res.sendStatus(500)
         }
     })
+    router.get('/all', async (req, res) => {
+        try {
+            let rows = await gemsService.getAllRows()
+            res.json(rows).status(200)
+        }
+        catch (e) {
+            res.sendStatus(500)
+        }
+    })
     return router
 }

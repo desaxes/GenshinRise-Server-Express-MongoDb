@@ -5,6 +5,10 @@ export const gemsRepo = {
         const rows = await gemsDb.find().toArray()
         return rows[rows.length - 31] ? rows.slice(rows.length - 31) : rows
     },
+    async getAllRows() {
+        const rows = await gemsDb.find().toArray()
+        return rows
+    },
     async addRow(data: any) {
         const rows = await gemsDb.find({}).toArray()
         const lastRow = rows[rows.length - 1]
@@ -24,7 +28,8 @@ export const gemsRepo = {
             rolls: +data.rolls,
             cash: +data.cash,
             income: +income,
-            expense: +expense
+            expense: +expense,
+            com: data.com
         })
         return row
     }
