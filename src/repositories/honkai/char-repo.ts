@@ -85,6 +85,7 @@ export const honkaiCharRepository = {
                 name: data.name,
                 img: data.img,
                 stars: +data.stars,
+                stoneTypeId:+data.stoneTypeId,
                 enemyMaterialId: +data.enemyMaterialId,
                 bossMaterialId: +data.bossMaterialId,
                 talentMaterialId: +data.talentMaterialId,
