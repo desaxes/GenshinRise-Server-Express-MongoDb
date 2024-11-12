@@ -1,5 +1,5 @@
 import { charDb, colDb, maxDb, riseDb } from '../..'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 import path from 'path'
 
 export const charRepository = {
@@ -196,12 +196,22 @@ export const charRepository = {
             }
         }
     },
-    async updateCharInfo(data: { id: number, ownWeaponId: number, info: string }) {
+    async updateCharInfo(data: updateCharDataType) {
         const updated = await charDb.updateOne({ id: +data.id },
             {
                 $set: {
-                    ownWeaponId: +data.ownWeaponId,
-                    info: data.info
+                    charInfo: {
+                        ownWeaponId: +data.ownWeaponId,
+                        recFiveStarWeaponId: +data.recFiveStarWeaponId,
+                        recFourStarWeaponId: +data.recFourStarWeaponId,
+                        firstArtSetfirstHalfId: +data.firstArtSetfirstHalfId,
+                        firstArtSetSecondHalfId: +data.firstArtSetSecondHalfId,
+                        secondArtSetfirstHalfId: +data.secondArtSetfirstHalfId,
+                        secondArtSetSecondHalfId: +data.secondArtSetSecondHalfId,
+                        thirdArtSetfirstHalfId: +data.thirdArtSetfirstHalfId,
+                        thirdArtSetSecondHalfId: +data.thirdArtSetSecondHalfId,
+                        info: data.info
+                    }
                 }
             }
         )

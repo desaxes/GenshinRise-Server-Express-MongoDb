@@ -2,7 +2,7 @@ import { FileArray } from 'express-fileupload'
 import { setQueryConditions } from '../../functions'
 import { CharQueryModel } from '../../models/CharQueryModel'
 import { charRepository } from '../../repositories/genshin/char-repo'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 
 export const characterService = {
     // Добавление персонажей в базу
@@ -65,7 +65,7 @@ export const characterService = {
     async getCharStat() {
         return charRepository.getCharStat()
     },
-    async updateCharInfo(data: { id: number, ownWeaponId: number, info: string }) {
+    async updateCharInfo(data: updateCharDataType) {
         return charRepository.updateCharInfo(data)
     }
 }

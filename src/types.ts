@@ -70,9 +70,25 @@ export type rollType = {
     isChar: boolean,
     rewardId: number,
     rewardName: string,
-    stars:number,
+    stars: number,
     img: string
 }
 export type newRollType = {
     id: number
 } & rollType
+export type updateCharDataType = {
+    id: number,
+    ownWeaponId: number,
+    recFiveStarWeaponId: number,
+    recFourStarWeaponId: number,
+    firstArtSetfirstHalfId: number,
+    firstArtSetSecondHalfId: number,
+    secondArtSetfirstHalfId: number,
+    secondArtSetSecondHalfId: number,
+    thirdArtSetfirstHalfId: number,
+    thirdArtSetSecondHalfId: number,
+    firstPlanarSetId: number,
+    secondPlanarSetId: number,
+    thirdPlanarSetId: number,
+    info: string
+}
