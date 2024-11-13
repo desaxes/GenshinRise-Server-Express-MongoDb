@@ -1,7 +1,7 @@
 import { FileArray } from 'express-fileupload'
 import { setQueryConditions } from '../../functions'
 import { CharQueryModel } from '../../models/CharQueryModel'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 import { honkaiCharRepository } from '../../repositories/honkai/char-repo'
 
 export const honkaiCharacterService = {
@@ -55,5 +55,8 @@ export const honkaiCharacterService = {
     },
     async getCharStat() {
         return honkaiCharRepository.getCharStat()
+    },
+    async updateCharInfo(data: updateCharDataType) {
+        return honkaiCharRepository.updateCharInfo(data)
     }
 }

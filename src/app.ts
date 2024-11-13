@@ -40,6 +40,9 @@ import { honkaiBannerRouter } from './routes/honkai/banner-router';
 import { gemsRouter } from './routes/genshin/gems-router';
 import { zzzGemsRouter } from './routes/zzz/gems-router';
 import { honkaiGemsRouter } from './routes/honkai/gems-router';
+import { artsRouter } from './routes/genshin/arts-router';
+import { honkaiArtsRouter } from './routes/honkai/arts-router';
+import { zzzArtsRouter } from './routes/zzz/arts-router';
 export const app = express()
 
 const jsonBodyMiddleware = express.json()
@@ -63,6 +66,7 @@ app.use("/genshin/rolls", rollRouter())
 app.use("/genshin/stat", statisticRouter())
 app.use("/genshin/banners", bannerRouter())
 app.use("/genshin/gems", gemsRouter())
+app.use("/genshin/arts", artsRouter())
 app.use("/zzz/lvlup", zzzCharLvlUpRouter())
 app.use("/zzz/talent", zzzCharTalentRouter())
 app.use("/zzz/weaponlvlup", zzzWeaponLvlUpRouter())
@@ -76,6 +80,7 @@ app.use("/zzz/weaponrise", zzzWeaponRiseRouter())
 app.use("/zzz/stat", zzzStatisticRouter())
 app.use("/zzz/banners", zzzBannerRouter())
 app.use("/zzz/gems", zzzGemsRouter())
+app.use("/zzz/arts", zzzArtsRouter())
 app.use("/honkai/lvlup", honkaiCharLvlUpRouter())
 app.use("/honkai/talent", honkaiCharTalentRouter())
 app.use("/honkai/characters", honkaiCharRouter())
@@ -88,3 +93,4 @@ app.use("/honkai/weaponrise", honkaiWeaponRiseRouter())
 app.use("/honkai/stat", honkaiStatisticRouter())
 app.use("/honkai/banners", honkaiBannerRouter())
 app.use("/honkai/gems", honkaiGemsRouter())
+app.use("/honkai/arts", honkaiArtsRouter())

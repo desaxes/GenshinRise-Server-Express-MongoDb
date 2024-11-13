@@ -2,7 +2,7 @@ import { FileArray } from 'express-fileupload'
 import { setQueryConditions } from '../../functions'
 import { CharQueryModel } from '../../models/CharQueryModel'
 import { charRepository } from '../../repositories/genshin/char-repo'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 import { zzzCharRepository } from '../../repositories/zzz/char-repo'
 
 export const zzzCharacterService = {
@@ -54,7 +54,10 @@ export const zzzCharacterService = {
     async removeCharFromRise(id: string) {
         return zzzCharRepository.removeCharfromRise(id)
     },
-    async getCharStat(){
+    async getCharStat() {
         return zzzCharRepository.getCharStat()
+    },
+    async updateCharInfo(data: updateCharDataType) {
+        return zzzCharRepository.updateCharInfo(data)
     }
 }

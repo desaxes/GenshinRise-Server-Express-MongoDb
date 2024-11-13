@@ -1,5 +1,5 @@
 import { charDb, colDb, maxDb, riseDb, zzzCharDb, zzzColDb, zzzRiseDb } from '../..'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 import path from 'path'
 
 export const zzzCharRepository = {
@@ -138,5 +138,26 @@ export const zzzCharRepository = {
                 all: charsRegions
             }
         }
+    },
+    async updateCharInfo(data: updateCharDataType) {
+        const updated = await zzzCharDb.updateOne({ id: +data.id },
+            {
+                $set: {
+                    charInfo: {
+                        ownWeaponId: +data.ownWeaponId,
+                        recFiveStarWeaponId: +data.recFiveStarWeaponId,
+                        recFourStarWeaponId: +data.recFourStarWeaponId,
+                        firstArtSetfirstHalfId: +data.firstArtSetfirstHalfId,
+                        firstArtSetSecondHalfId: +data.firstArtSetSecondHalfId,
+                        secondArtSetfirstHalfId: +data.secondArtSetfirstHalfId,
+                        secondArtSetSecondHalfId: +data.secondArtSetSecondHalfId,
+                        thirdArtSetfirstHalfId: +data.thirdArtSetfirstHalfId,
+                        thirdArtSetSecondHalfId: +data.thirdArtSetSecondHalfId,
+                        info: data.info
+                    }
+                }
+            }
+        )
+        return updated
     }
 }

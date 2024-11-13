@@ -44,5 +44,18 @@ export const honkaiCharRouter = () => {
                 res.status(StatusCodes.BAD_REQUEST)
             }
         })
+    router.put('/update',
+        async (req, res) => {
+            try {
+                const updateChar = await honkaiCharacterService.updateCharInfo(req.body)
+                if (updateChar) { res.status(StatusCodes.CREATED).json(updateChar) }
+                else {
+                    res.status(StatusCodes.BAD_REQUEST).json({ message: 'error' })
+                }
+            }
+            catch (e) {
+                res.status(StatusCodes.BAD_REQUEST)
+            }
+        })
     return router
 }

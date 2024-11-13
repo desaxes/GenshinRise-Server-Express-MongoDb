@@ -26,6 +26,7 @@ let erollDb: Collection
 let srollDb: Collection
 let bannerDb: Collection
 let gemsDb: Collection
+let artsDb: Collection
 let honkaiCharDb: Collection
 let honkaiBossDb: Collection
 let honkaiEnemyDb: Collection
@@ -41,6 +42,7 @@ let honkaiErollDb: Collection
 let honkaiSrollDb: Collection
 let honkaiBannerDb: Collection
 let honkaiGemsDb: Collection
+let honkaiArtsDb: Collection
 let zzzCharDb: Collection
 let zzzBossDb: Collection
 let zzzEnemyDb: Collection
@@ -57,6 +59,7 @@ let zzzSrollDb: Collection
 let zzzBannerDb: Collection
 let zzzWmatDb: Collection
 let zzzGemsDb: Collection
+let zzzArtsDb: Collection
 
 (async () => {
     try {
@@ -83,6 +86,7 @@ let zzzGemsDb: Collection
         srollDb = mongoClient.db("Genshin").collection('StandartRolls')
         bannerDb = mongoClient.db("Genshin").collection('Banners')
         gemsDb = mongoClient.db("Genshin").collection('Gems')
+        artsDb = mongoClient.db("Genshin").collection('Arts')
         honkaiCharDb = mongoClient.db("Honkai").collection('Characters')
         honkaiBossDb = mongoClient.db("Honkai").collection('BossMaterials')
         honkaiEnemyDb = mongoClient.db("Honkai").collection('EnemyMaterials')
@@ -98,6 +102,7 @@ let zzzGemsDb: Collection
         honkaiSrollDb = mongoClient.db("Honkai").collection('StandartRolls')
         honkaiBannerDb = mongoClient.db("Honkai").collection('Banners')
         honkaiGemsDb = mongoClient.db("Honkai").collection('Gems')
+        honkaiArtsDb = mongoClient.db("Honkai").collection('Arts')
         zzzCharDb = mongoClient.db("ZZZ").collection('Characters')
         zzzBossDb = mongoClient.db("ZZZ").collection('BossMaterials')
         zzzEnemyDb = mongoClient.db("ZZZ").collection('EnemyMaterials')
@@ -114,6 +119,7 @@ let zzzGemsDb: Collection
         zzzBannerDb = mongoClient.db("ZZZ").collection('Banners')
         zzzWmatDb = mongoClient.db("ZZZ").collection('WeaponMaterials')
         zzzGemsDb = mongoClient.db("ZZZ").collection('Gems')
+        zzzArtsDb = mongoClient.db("ZZZ").collection('Arts')
         app.listen(port);
         console.log("Success");
     } catch (err) {
@@ -128,7 +134,7 @@ export {
     timersDb, maxDb, weaponDb,
     maxWeaponDb, wcolDb, wriseDb,
     wmatDb, ewmatDb, wrollDb,
-    erollDb, srollDb, bannerDb, gemsDb,
+    erollDb, srollDb, bannerDb, gemsDb, artsDb,
     honkaiCharDb,
     honkaiBossDb,
     honkaiEnemyDb,
@@ -144,6 +150,7 @@ export {
     honkaiSrollDb,
     honkaiBannerDb,
     honkaiGemsDb,
+    honkaiArtsDb,
     zzzCharDb,
     zzzBossDb,
     zzzEnemyDb,
@@ -159,5 +166,6 @@ export {
     zzzSrollDb,
     zzzBannerDb,
     zzzWmatDb,
-    zzzGemsDb
+    zzzGemsDb,
+    zzzArtsDb
 }

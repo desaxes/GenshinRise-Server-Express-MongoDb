@@ -1,5 +1,5 @@
 import { charDb, colDb, honkaiCharDb, honkaiColDb, honkaiRiseDb, maxDb, riseDb, zzzCharDb, zzzColDb, zzzRiseDb } from '../..'
-import { char, newChar, updateChar } from '../../types'
+import { char, newChar, updateChar, updateCharDataType } from '../../types'
 import path from 'path'
 
 export const honkaiCharRepository = {
@@ -77,7 +77,7 @@ export const honkaiCharRepository = {
         const char = await honkaiRiseDb.findOne<newChar | null>({ id: parseInt(id) })
         return char
     },
-    async addCharToRise(data: newChar) {
+    async addCharToRise(data: any) {
         const dublicate = await honkaiRiseDb.findOne({ id: data.id })
         if (!dublicate) {
             const newChar = await honkaiRiseDb.insertOne({
@@ -85,7 +85,8 @@ export const honkaiCharRepository = {
                 name: data.name,
                 img: data.img,
                 stars: +data.stars,
-                stoneTypeId:+data.stoneTypeId,
+                pathId: +data.pathId,
+                stoneTypeId: +data.stoneTypeId,
                 enemyMaterialId: +data.enemyMaterialId,
                 bossMaterialId: +data.bossMaterialId,
                 talentMaterialId: +data.talentMaterialId,
@@ -141,5 +142,29 @@ export const honkaiCharRepository = {
                 all: charsRegions
             }
         }
+    },
+    async updateCharInfo(data: updateCharDataType) {
+        const updated = await honkaiCharDb.updateOne({ id: +data.id },
+            {
+                $set: {
+                    charInfo: {
+                        ownWeaponId: +data.ownWeaponId,
+                        recFiveStarWeaponId: +data.recFiveStarWeaponId,
+                        recFourStarWeaponId: +data.recFourStarWeaponId,
+                        firstArtSetfirstHalfId: +data.firstArtSetfirstHalfId,
+                        firstArtSetSecondHalfId: +data.firstArtSetSecondHalfId,
+                        secondArtSetfirstHalfId: +data.secondArtSetfirstHalfId,
+                        secondArtSetSecondHalfId: +data.secondArtSetSecondHalfId,
+                        thirdArtSetfirstHalfId: +data.thirdArtSetfirstHalfId,
+                        thirdArtSetSecondHalfId: +data.thirdArtSetSecondHalfId,
+                        firstPlanarSetId: +data.firstPlanarSetId,
+                        secondPlanarSetId: +data.secondPlanarSetId,
+                        thirdPlanarSetId: +data.thirdPlanarSetId,
+                        info: data.info
+                    }
+                }
+            }
+        )
+        return updated
     }
 }
