@@ -90,5 +90,13 @@ export type updateCharDataType = {
     firstPlanarSetId: number,
     secondPlanarSetId: number,
     thirdPlanarSetId: number,
+    firstArtProp: string
+    secondArtProp: string
+    thirdArtProp: string
+    fourthArtProp: string
+    charProps: string,
+    firstTeam: string,
+    secondTeam: string,
+    thirdTeam: string,
     info: string
 }

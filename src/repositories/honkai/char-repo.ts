@@ -160,6 +160,14 @@ export const honkaiCharRepository = {
                         firstPlanarSetId: +data.firstPlanarSetId,
                         secondPlanarSetId: +data.secondPlanarSetId,
                         thirdPlanarSetId: +data.thirdPlanarSetId,
+                        firstArtProp: JSON.parse(data.firstArtProp),
+                        secondArtProp: JSON.parse(data.secondArtProp),
+                        thirdArtProp: JSON.parse(data.thirdArtProp),
+                        fourthArtProp: JSON.parse(data.fourthArtProp),
+                        charProps: JSON.parse(data.charProps),
+                        firstTeam: JSON.parse(data.firstTeam),
+                        secondTeam: JSON.parse(data.secondTeam),
+                        thirdTeam: JSON.parse(data.thirdTeam),
                         info: data.info
                     }
                 }

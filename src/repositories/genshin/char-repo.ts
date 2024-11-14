@@ -210,6 +210,13 @@ export const charRepository = {
                         secondArtSetSecondHalfId: +data.secondArtSetSecondHalfId,
                         thirdArtSetfirstHalfId: +data.thirdArtSetfirstHalfId,
                         thirdArtSetSecondHalfId: +data.thirdArtSetSecondHalfId,
+                        firstArtProp: JSON.parse(data.firstArtProp),
+                        secondArtProp: JSON.parse(data.secondArtProp),
+                        thirdArtProp: JSON.parse(data.thirdArtProp),
+                        charProps: JSON.parse(data.charProps),
+                        firstTeam: JSON.parse(data.firstTeam),
+                        secondTeam: JSON.parse(data.secondTeam),
+                        thirdTeam: JSON.parse(data.thirdTeam),
                         info: data.info
                     }
                 }
