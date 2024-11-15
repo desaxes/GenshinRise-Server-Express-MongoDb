@@ -1,5 +1,5 @@
-import { honkaiWcolDb, honkaiWeaponDb, honkaiWriseDb, maxWeaponDb, wcolDb, weaponDb, wriseDb, zzzWcolDb, zzzWeaponDb, zzzWriseDb } from '../..'
-import { newWeapon, updateWeapon, weaponType } from '../../types'
+import { honkaiWcolDb, honkaiWeaponDb, honkaiWriseDb } from '../..'
+import { newWeapon, updateWeapon, updateWeaponDataType } from '../../types'
 import path from 'path'
 
 export const honkaiWeaponRepository = {
@@ -116,4 +116,21 @@ export const honkaiWeaponRepository = {
     async removeWeaponfromRise(id: string) {
         await honkaiWriseDb.deleteOne({ id: +id })
     },
+    async updateWeaponInfo(data: updateWeaponDataType) {
+        const updated = await honkaiWeaponDb.updateOne({ id: +data.id },
+            {
+                $set: {
+                    weaponInfo: {
+                        prop: JSON.parse(data.prop),
+                        info: data.info,
+                        attack: data.attack,
+                        def: data.def,
+                        hp: data.hp,
+                        propValue: data.propValue
+                    }
+                }
+            }
+        )
+        return updated
+    }
 }

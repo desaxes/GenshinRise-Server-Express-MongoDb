@@ -1,6 +1,6 @@
 import { FileArray } from 'express-fileupload'
 import { setQueryConditionsForWeapons } from '../../functions'
-import { newWeapon, updateWeapon, weaponType } from '../../types'
+import { newWeapon, updateWeapon, updateWeaponDataType, weaponType } from '../../types'
 import { WeaponQueryModel } from '../../models/WeaponQueryModel'
 import { honkaiWeaponRepository } from '../../repositories/honkai/weapon-repo'
 
@@ -52,5 +52,8 @@ export const honkaiWeaponService = {
     },
     async removeWeaponFromRise(id: string) {
         return honkaiWeaponRepository.removeWeaponfromRise(id)
+    },
+    async updateWeaponInfo(data: updateWeaponDataType) {
+        return honkaiWeaponRepository.updateWeaponInfo(data)
     }
 }

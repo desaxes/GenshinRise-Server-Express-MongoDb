@@ -5,7 +5,6 @@ import { InsertOneResult } from 'mongodb'
 import { newWeapon, weaponType } from '../../types'
 import { URIParamsModel } from '../../models/URIParamsModel'
 import { WeaponQueryModel } from '../../models/WeaponQueryModel'
-import { weaponService } from '../../domain/genshin/weapon-service'
 import { zzzWeaponService } from '../../domain/zzz/weapon-service'
 
 export const zzzWeaponRouter = () => {
@@ -36,6 +35,19 @@ export const zzzWeaponRouter = () => {
                 let files = req.files
                 const newWeapon = await zzzWeaponService.createWeapon(req.body, files)
                 if (newWeapon) { res.status(StatusCodes.CREATED).json(newWeapon) }
+                else {
+                    res.status(StatusCodes.BAD_REQUEST).json({ message: 'error' })
+                }
+            }
+            catch (e) {
+                res.status(StatusCodes.BAD_REQUEST)
+            }
+        })
+    router.put('/update',
+        async (req, res) => {
+            try {
+                const updateWeapon = await zzzWeaponService.updateWeaponInfo(req.body)
+                if (updateWeapon) { res.status(StatusCodes.CREATED).json(updateWeapon) }
                 else {
                     res.status(StatusCodes.BAD_REQUEST).json({ message: 'error' })
                 }

@@ -1,6 +1,6 @@
 import { FileArray } from 'express-fileupload'
 import { setQueryConditionsForWeapons } from '../../functions'
-import {newWeapon, updateWeapon, weaponType } from '../../types'
+import { newWeapon, updateWeapon, updateWeaponDataType, weaponType } from '../../types'
 import { WeaponQueryModel } from '../../models/WeaponQueryModel'
 import { weaponRepository } from '../../repositories/genshin/weapon-repo'
 import { zzzWeaponRepository } from '../../repositories/zzz/weapon-repo'
@@ -53,5 +53,8 @@ export const zzzWeaponService = {
     },
     async removeWeaponFromRise(id: string) {
         return zzzWeaponRepository.removeWeaponfromRise(id)
+    },
+    async updateWeaponInfo(data: updateWeaponDataType) {
+        return zzzWeaponRepository.updateWeaponInfo(data)
     }
 }

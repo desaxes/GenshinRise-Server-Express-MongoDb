@@ -100,3 +100,13 @@ export type updateCharDataType = {
     thirdTeam: string,
     info: string
 }
+export type updateWeaponDataType = {
+    id: number,
+    info: string,
+    attack: string,
+    def: string,
+    hp: string,
+    prop: string,
+    propValue: string,
+    effect: string,
+}

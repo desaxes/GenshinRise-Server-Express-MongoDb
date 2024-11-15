@@ -43,5 +43,18 @@ export const weaponRouter = () => {
                 res.status(StatusCodes.BAD_REQUEST)
             }
         })
+    router.put('/update',
+        async (req, res) => {
+            try {
+                const updateWeapon = await weaponService.updateWeaponInfo(req.body)
+                if (updateWeapon) { res.status(StatusCodes.CREATED).json(updateWeapon) }
+                else {
+                    res.status(StatusCodes.BAD_REQUEST).json({ message: 'error' })
+                }
+            }
+            catch (e) {
+                res.status(StatusCodes.BAD_REQUEST)
+            }
+        })
     return router
 }

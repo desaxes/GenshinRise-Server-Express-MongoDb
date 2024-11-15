@@ -1,5 +1,5 @@
 import { maxWeaponDb, wcolDb, weaponDb, wriseDb, zzzWcolDb, zzzWeaponDb, zzzWriseDb } from '../..'
-import { newWeapon, updateWeapon, weaponType } from '../../types'
+import { newWeapon, updateWeapon, updateWeaponDataType, weaponType } from '../../types'
 import path from 'path'
 
 export const zzzWeaponRepository = {
@@ -107,4 +107,19 @@ export const zzzWeaponRepository = {
     async removeWeaponfromRise(id: string) {
         await zzzWriseDb.deleteOne({ id: +id })
     },
+    async updateWeaponInfo(data: updateWeaponDataType) {
+        const updated = await zzzWeaponDb.updateOne({ id: +data.id },
+            {
+                $set: {
+                    weaponInfo: {
+                        prop: JSON.parse(data.prop),
+                        info: data.info,
+                        attack: data.attack,
+                        propValue: data.propValue
+                    }
+                }
+            }
+        )
+        return updated
+    }
 }
