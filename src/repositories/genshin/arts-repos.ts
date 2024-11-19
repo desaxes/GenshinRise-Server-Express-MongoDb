@@ -3,7 +3,7 @@ import { artsDb } from "../.."
 
 export const artsRepo = {
     async getArts() {
-        const arts = await artsDb.find().toArray()
+        const arts = await artsDb.find().sort({ name: 1 }).toArray()
         return arts
     },
     async getArtById(id: number) {
@@ -21,8 +21,8 @@ export const artsRepo = {
                     id: lastId,
                     name: data.name,
                     img: fileName,
-                    twoPartsEffect:data.twoPartsEffect,
-                    fourPartsEffect:data.fourPartsEffect
+                    twoPartsEffect: data.twoPartsEffect,
+                    fourPartsEffect: data.fourPartsEffect
                 })
             return newArt
         }

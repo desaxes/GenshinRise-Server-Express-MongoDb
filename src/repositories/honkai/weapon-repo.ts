@@ -121,12 +121,10 @@ export const honkaiWeaponRepository = {
             {
                 $set: {
                     weaponInfo: {
-                        prop: JSON.parse(data.prop),
                         info: data.info,
                         attack: data.attack,
                         def: data.def,
                         hp: data.hp,
-                        propValue: data.propValue
                     }
                 }
             }

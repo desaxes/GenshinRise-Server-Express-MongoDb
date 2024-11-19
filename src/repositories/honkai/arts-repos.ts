@@ -3,7 +3,7 @@ import { honkaiArtsDb } from "../.."
 
 export const honkaiArtsRepo = {
     async getArts() {
-        const arts = await honkaiArtsDb.find().toArray()
+        const arts = await honkaiArtsDb.find().sort({ name: 1 }).toArray()
         return arts
     },
     async getArtById(id: number) {

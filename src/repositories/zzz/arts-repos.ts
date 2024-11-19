@@ -3,7 +3,7 @@ import { zzzArtsDb } from "../.."
 
 export const zzzArtsRepo = {
     async getArts() {
-        const arts = await zzzArtsDb.find().toArray()
+        const arts = await zzzArtsDb.find().sort({ name: 1 }).toArray()
         return arts
     },
     async getArtById(id: number) {
