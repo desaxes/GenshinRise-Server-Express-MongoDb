@@ -29,6 +29,16 @@ export const zzzCharRouter = () => {
                 res.sendStatus(StatusCodes.NOT_FOUND)
             }
         })
+    router.get('/weapon/:id',
+        async (req, res) => {
+            try {
+                const chars = await zzzCharacterService.getCharForWeapon(+req.params.id)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND)
+            }
+        })
     router.post('/',
         async (req: RequestWithBody<char>, res: Response<InsertOneResult | { message: string }>) => {
             try {

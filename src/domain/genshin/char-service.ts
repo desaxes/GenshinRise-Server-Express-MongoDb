@@ -67,5 +67,8 @@ export const characterService = {
     },
     async updateCharInfo(data: updateCharDataType) {
         return charRepository.updateCharInfo(data)
-    }
+    },
+    async getCharForWeapon(id: number) {
+        return charRepository.getCharForWeapon(id)
+    },
 }

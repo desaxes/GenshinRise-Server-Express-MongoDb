@@ -149,8 +149,9 @@ export const honkaiCharRepository = {
                 $set: {
                     charInfo: {
                         ownWeaponId: +data.ownWeaponId,
-                        recFiveStarWeaponId: +data.recFiveStarWeaponId,
-                        recFourStarWeaponId: +data.recFourStarWeaponId,
+                        recWeapons: JSON.parse(data.recWeapons),
+                        // recFiveStarWeaponId: +data.recFiveStarWeaponId,
+                        // recFourStarWeaponId: +data.recFourStarWeaponId,
                         firstArtSetfirstHalfId: +data.firstArtSetfirstHalfId,
                         firstArtSetSecondHalfId: +data.firstArtSetSecondHalfId,
                         secondArtSetfirstHalfId: +data.secondArtSetfirstHalfId,
@@ -174,5 +175,9 @@ export const honkaiCharRepository = {
             }
         )
         return updated
+    },
+    async getCharForWeapon(id: number) {
+        const char = await honkaiCharDb.find({ 'charInfo.ownWeaponId': id }).toArray()
+        return char[0]
     }
 }

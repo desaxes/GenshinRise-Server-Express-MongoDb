@@ -1,4 +1,4 @@
-import { maxWeaponDb, wcolDb, weaponDb, wriseDb } from '../..'
+import { charDb, maxWeaponDb, wcolDb, weaponDb, wriseDb } from '../..'
 import { newWeapon, updateWeapon, updateWeaponDataType, weaponType } from '../../types'
 import path from 'path'
 

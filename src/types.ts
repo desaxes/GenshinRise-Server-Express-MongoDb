@@ -79,6 +79,7 @@ export type newRollType = {
 export type updateCharDataType = {
     id: number,
     ownWeaponId: number,
+    recWeapons: string,
     recFiveStarWeaponId: number,
     recFourStarWeaponId: number,
     firstArtSetfirstHalfId: number,

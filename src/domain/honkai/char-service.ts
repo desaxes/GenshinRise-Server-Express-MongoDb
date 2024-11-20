@@ -58,5 +58,8 @@ export const honkaiCharacterService = {
     },
     async updateCharInfo(data: updateCharDataType) {
         return honkaiCharRepository.updateCharInfo(data)
-    }
+    },
+    async getCharForWeapon(id: number) {
+        return honkaiCharRepository.getCharForWeapon(id)
+    },
 }
