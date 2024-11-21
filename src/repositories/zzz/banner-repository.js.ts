@@ -1,5 +1,5 @@
 import path from "path"
-import { bannerDb, erollDb, srollDb, wrollDb, zzzBannerDb } from "../.."
+import { bannerDb, erollDb, srollDb, wrollDb, zzzBannerDb, zzzCharDb } from "../.."
 import { newRollType, rollType } from "../../types"
 
 export const zzzBannerRepository = {
@@ -24,7 +24,6 @@ export const zzzBannerRepository = {
                 fileName2 = files.img2.name
                 files.img2.mv(path.resolve(__dirname, '../..', 'static/zzz/bannerImgs', fileName2))
             }
-            console.log(data)
             const banner = await zzzBannerDb.insertOne({
                 id: lastId,
                 year: +data.year,
@@ -43,6 +42,66 @@ export const zzzBannerRepository = {
                 epicCharId3: data.epicCharId3,
                 patchNumber: data.patchNumber
             })
+            if (data.charId1) {
+                await zzzCharDb.updateOne({ id: +data.charId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.charId2) {
+                await zzzCharDb.updateOne({ id: +data.charId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId1) {
+                await zzzCharDb.updateOne({ id: +data.epicCharId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId2) {
+                await zzzCharDb.updateOne({ id: +data.epicCharId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId3) {
+                await zzzCharDb.updateOne({ id: +data.epicCharId3 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
             return banner
         }
         else {

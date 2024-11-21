@@ -1,5 +1,5 @@
 import path from "path"
-import { honkaiBannerDb } from "../.."
+import { honkaiBannerDb, honkaiCharDb } from "../.."
 
 export const honkaiBannerRepository = {
     async getAllBanners(limit: number, offset: number) {
@@ -23,7 +23,6 @@ export const honkaiBannerRepository = {
                 fileName2 = files.img2.name
                 files.img2.mv(path.resolve(__dirname, '../..', 'static/honkai/bannerImgs', fileName2))
             }
-            console.log(data)
             const banner = await honkaiBannerDb.insertOne({
                 id: lastId,
                 year: +data.year,
@@ -46,6 +45,90 @@ export const honkaiBannerRepository = {
                 epicCharId3: data.epicCharId3,
                 patchNumber: data.patchNumber
             })
+            if (data.charId1) {
+                await honkaiCharDb.updateOne({ id: +data.charId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.charId2) {
+                await honkaiCharDb.updateOne({ id: +data.charId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.charId3) {
+                await honkaiCharDb.updateOne({ id: +data.charId3 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.charId4) {
+                await honkaiCharDb.updateOne({ id: +data.charId4 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId1) {
+                await honkaiCharDb.updateOne({ id: +data.epicCharId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId2) {
+                await honkaiCharDb.updateOne({ id: +data.epicCharId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId3) {
+                await honkaiCharDb.updateOne({ id: +data.epicCharId3 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
             return banner
         }
         else {

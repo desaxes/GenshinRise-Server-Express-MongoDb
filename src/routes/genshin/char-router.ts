@@ -19,6 +19,36 @@ export const charRouter = () => {
                 res.sendStatus(500)
             }
         })
+    router.get('/sort/number',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await characterService.getCharsWithSortByPatchNumber(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/sort/counter',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await characterService.getCharsWithSortByPatchCounter(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/sort/release',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await characterService.getCharsWithSortByRelease(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
     router.get('/:id',
         async (req: RequestWithParams<URIParamsModel>, res: Response<newChar | null>) => {
             try {

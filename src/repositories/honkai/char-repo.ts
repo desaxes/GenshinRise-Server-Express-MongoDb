@@ -1,11 +1,35 @@
-import { charDb, colDb, honkaiCharDb, honkaiColDb, honkaiRiseDb, maxDb, riseDb, zzzCharDb, zzzColDb, zzzRiseDb } from '../..'
-import { char, newChar, updateChar, updateCharDataType } from '../../types'
+import { honkaiCharDb, honkaiColDb, honkaiRiseDb } from '../..'
+import { newChar, updateChar, updateCharDataType } from '../../types'
 import path from 'path'
 
 export const honkaiCharRepository = {
     async getChars(finalConditions: any, limit: number, offset: number) {
         const charCounter = (await honkaiCharDb.find<newChar>(finalConditions).toArray()).length
         const chars = await honkaiCharDb.find<newChar>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
+    async getCharsWithSortByPatchNumber(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await honkaiCharDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await honkaiCharDb.find<newChar>(finalConditions).sort({ 'charInfo.lastPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
+    async getCharsWithSortByPatchCounter(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await honkaiCharDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await honkaiCharDb.find<newChar>(finalConditions).sort({ 'charInfo.patchCounter': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
+    async getCharsWithSortByRelease(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await honkaiCharDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await honkaiCharDb.find<newChar>(finalConditions).sort({ 'charInfo.firstPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
             chars: chars,
             total: charCounter
@@ -169,6 +193,9 @@ export const honkaiCharRepository = {
                         firstTeam: JSON.parse(data.firstTeam),
                         secondTeam: JSON.parse(data.secondTeam),
                         thirdTeam: JSON.parse(data.thirdTeam),
+                        firstPatch: +data.firstPatch,
+                        lastPatch: +data.lastPatch,
+                        patchCounter: +data.patchCounter,
                         info: data.info
                     }
                 }

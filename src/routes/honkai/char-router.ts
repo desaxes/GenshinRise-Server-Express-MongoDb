@@ -5,7 +5,6 @@ import { StatusCodes } from '../../StatusCodes'
 import { InsertOneResult } from 'mongodb'
 import { char, newChar } from '../../types'
 import { URIParamsModel } from '../../models/URIParamsModel'
-import { zzzCharacterService } from '../../domain/zzz/char-service'
 import { honkaiCharacterService } from '../../domain/honkai/char-service'
 
 export const honkaiCharRouter = () => {
@@ -14,6 +13,36 @@ export const honkaiCharRouter = () => {
         async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
             try {
                 let chars = await honkaiCharacterService.getChars(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/sort/number',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await honkaiCharacterService.getCharsWithSortByPatchNumber(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/sort/counter',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await honkaiCharacterService.getCharsWithSortByPatchCounter(req.query)
+                res.json(chars).status(200)
+            }
+            catch (e) {
+                res.sendStatus(500)
+            }
+        })
+    router.get('/sort/release',
+        async (req: RequestWithQuery<CharQueryModel>, res: Response<any>) => {
+            try {
+                let chars = await honkaiCharacterService.getCharsWithSortByRelease(req.query)
                 res.json(chars).status(200)
             }
             catch (e) {

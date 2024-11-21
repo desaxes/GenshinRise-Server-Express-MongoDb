@@ -12,6 +12,24 @@ export const honkaiCharacterService = {
         let finalConditions = setQueryConditions(query)
         return await honkaiCharRepository.getChars(finalConditions, +lim, offset)
     },
+    async getCharsWithSortByPatchNumber(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await honkaiCharRepository.getCharsWithSortByPatchNumber(finalConditions, +lim, offset)
+    },
+    async getCharsWithSortByPatchCounter(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await honkaiCharRepository.getCharsWithSortByPatchCounter(finalConditions, +lim, offset)
+    },
+    async getCharsWithSortByRelease(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await honkaiCharRepository.getCharsWithSortByRelease(finalConditions, +lim, offset)
+    },
     async getCharById(id: string) {
         return honkaiCharRepository.getCharById(id)
     },

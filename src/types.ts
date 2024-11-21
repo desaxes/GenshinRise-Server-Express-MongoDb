@@ -99,6 +99,9 @@ export type updateCharDataType = {
     firstTeam: string,
     secondTeam: string,
     thirdTeam: string,
+    firstPatch: number,
+    lastPatch: number,
+    patchCounter: number,
     info: string
 }
 export type updateWeaponDataType = {

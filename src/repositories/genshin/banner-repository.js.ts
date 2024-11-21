@@ -1,5 +1,5 @@
 import path from "path"
-import { bannerDb, erollDb, srollDb, wrollDb } from "../.."
+import { bannerDb, charDb, erollDb, srollDb, wrollDb } from "../.."
 import { newRollType, rollType } from "../../types"
 
 export const BannerRepository = {
@@ -42,6 +42,66 @@ export const BannerRepository = {
                 epicCharId3: data.epicCharId3,
                 patchNumber: data.patchNumber
             })
+            if (data.charId1) {
+                await charDb.updateOne({ id: +data.charId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.charId2) {
+                await charDb.updateOne({ id: +data.charId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId1) {
+                await charDb.updateOne({ id: +data.epicCharId1 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId2) {
+                await charDb.updateOne({ id: +data.epicCharId2 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
+            if (data.epicCharId3) {
+                await charDb.updateOne({ id: +data.epicCharId3 },
+                    {
+                        $set: {
+                            'charInfo.lastPatch': +data.patchNumber,
+                        },
+                        $inc: {
+                            'charInfo.patchCounter': 1
+                        }
+                    }
+                )
+            }
             return banner
         }
         else {

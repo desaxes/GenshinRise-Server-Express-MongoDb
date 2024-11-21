@@ -11,6 +11,30 @@ export const charRepository = {
             total: charCounter
         }
     },
+    async getCharsWithSortByPatchNumber(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.lastPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
+    async getCharsWithSortByPatchCounter(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.patchCounter': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
+    async getCharsWithSortByRelease(finalConditions: any, limit: number, offset: number) {
+        const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
+        const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.firstPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        return {
+            chars: chars,
+            total: charCounter
+        }
+    },
     async getCharById(id: string) {
         const char = await charDb.findOne<newChar | null>({ id: parseInt(id) })
         return char
@@ -218,6 +242,9 @@ export const charRepository = {
                         firstTeam: JSON.parse(data.firstTeam),
                         secondTeam: JSON.parse(data.secondTeam),
                         thirdTeam: JSON.parse(data.thirdTeam),
+                        firstPatch: +data.firstPatch,
+                        lastPatch: +data.lastPatch,
+                        patchCounter: +data.patchCounter,
                         info: data.info
                     }
                 }

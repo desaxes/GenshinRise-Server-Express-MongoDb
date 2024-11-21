@@ -12,6 +12,24 @@ export const zzzCharacterService = {
         let finalConditions = setQueryConditions(query)
         return await zzzCharRepository.getChars(finalConditions, +lim, offset)
     },
+    async getCharsWithSortByPatchNumber(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await zzzCharRepository.getCharsWithSortByPatchNumber(finalConditions, +lim, offset)
+    },
+    async getCharsWithSortByPatchCounter(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await zzzCharRepository.getCharsWithSortByPatchCounter(finalConditions, +lim, offset)
+    },
+    async getCharsWithSortByRelease(query: CharQueryModel) {
+        let lim = query.limit || 5
+        let offset = (query.page ? +query.page : 1) * +lim - +lim
+        let finalConditions = setQueryConditions(query)
+        return await zzzCharRepository.getCharsWithSortByRelease(finalConditions, +lim, offset)
+    },
     async getCharById(id: string) {
         return zzzCharRepository.getCharById(id)
     },
