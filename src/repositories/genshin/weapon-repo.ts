@@ -15,6 +15,7 @@ export const weaponRepository = {
         const weapon = await weaponDb.findOne<newWeapon | null>({ id: parseInt(id) })
         return weapon
     },
+    
     async createWeapon(data: weaponType, files: any) {
         const weapons = await weaponDb.find({}).toArray()
         let lastId = weapons.length > 0 ? weapons[weapons.length - 1].id + 1 : 1
