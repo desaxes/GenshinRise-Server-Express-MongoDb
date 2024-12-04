@@ -23,7 +23,7 @@ export const honkaiArtsRepo = {
                     img: fileName,
                     twoPartsEffect: data.twoPartsEffect,
                     fourPartsEffect: data.fourPartsEffect,
-                    planar: Boolean(data.planar)
+                    planar: data.planar === 'true' ? true : false
                 })
             return newArt
         }

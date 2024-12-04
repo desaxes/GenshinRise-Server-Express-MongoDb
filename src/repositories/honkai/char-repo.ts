@@ -154,8 +154,8 @@ export const honkaiCharRepository = {
         await honkaiRiseDb.deleteOne({ id: +id })
     },
     async getCharStat() {
-        const charsElements = await honkaiCharDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$pathId" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
-        const charsRegions = await honkaiCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
+        const charsElements = await honkaiCharDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$pathId" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const charsRegions = await honkaiCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
         const colElements = await honkaiColDb.aggregate([{ $group: { _id: { element: "$stoneTypeId" }, count: { $sum: 1 } } }]).toArray()
         return {
             elements: {

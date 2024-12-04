@@ -150,8 +150,8 @@ export const zzzCharRepository = {
         await zzzRiseDb.deleteOne({ id: +id })
     },
     async getCharStat() {
-        const charsElements = await zzzCharDb.aggregate([{ $group: { _id: { element: "$talentMaterialId", weaponId: "$enemyMaterialId" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
-        const charsRegions = await zzzCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
+        const charsElements = await zzzCharDb.aggregate([{ $group: { _id: { element: "$talentMaterialId", weaponId: "$enemyMaterialId" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const charsRegions = await zzzCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
         const colElements = await zzzColDb.aggregate([{ $group: { _id: { element: "$talentMaterialId" }, count: { $sum: 1 } } }]).toArray()
         return {
             elements: {
