@@ -7,7 +7,25 @@ export const zzzCharRepository = {
         const charCounter = (await zzzCharDb.find<newChar>(finalConditions).toArray()).length
         const chars = await zzzCharDb.find<newChar>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    enemyMaterialId: e.enemyMaterialId,
+                    talentMaterialId: e.talentMaterialId,
+                    stars: e.stars,
+                    name: e.name,
+                    charInfo: {
+                        recWeapons: e.charInfo?.recWeapons ? e.charInfo.recWeapons : [],
+                        firstArtSetfirstHalfId: e.charInfo?.firstArtSetfirstHalfId ? e.charInfo.firstArtSetfirstHalfId : 0,
+                        firstArtSetsecondHalfId: e.charInfo?.firstArtSetsecondHalfId ? e.charInfo.firstArtSetsecondHalfId : 0,
+                        secondArtSetfirstHalfId: e.charInfo?.secondArtSetfirstHalfId ? e.charInfo.secondArtSetfirstHalfId : 0,
+                        secondArtSetsecondHalfId: e.charInfo?.secondArtSetsecondHalfId ? e.charInfo.secondArtSetsecondHalfId : 0,
+                        thirdArtSetfirstHalfId: e.charInfo?.thirdArtSetfirstHalfId ? e.charInfo.thirdArtSetfirstHalfId : 0,
+                        thirdArtSetsecondHalfId: e.charInfo?.thirdArtSetsecondHalfId ? e.charInfo.thirdArtSetsecondHalfId : 0
+                    }
+                }
+            }),
             total: charCounter
         }
     },
@@ -15,7 +33,17 @@ export const zzzCharRepository = {
         const charCounter = (await zzzCharDb.find<newChar>(finalConditions).toArray()).length
         const chars = await zzzCharDb.find<newChar>(finalConditions).sort({ 'charInfo.lastPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        lastPatch: e.charInfo?.lastPatch ? e.charInfo.lastPatch : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -23,7 +51,17 @@ export const zzzCharRepository = {
         const charCounter = (await zzzCharDb.find<newChar>(finalConditions).toArray()).length
         const chars = await zzzCharDb.find<newChar>(finalConditions).sort({ 'charInfo.patchCounter': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        patchCounter: e.charInfo?.patchCounter ? e.charInfo.patchCounter : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -31,7 +69,17 @@ export const zzzCharRepository = {
         const charCounter = (await zzzCharDb.find<newChar>(finalConditions).toArray()).length
         const chars = await zzzCharDb.find<newChar>(finalConditions).sort({ 'charInfo.firstPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        firstPatch: e.charInfo?.firstPatch ? e.charInfo.firstPatch : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -67,9 +115,17 @@ export const zzzCharRepository = {
     async getCharsFromCol(finalConditions: any, limit: number, offset: number) {
         const charCounter = (await zzzColDb.find<newChar>(finalConditions).toArray()).length
         const chars = await zzzColDb.find<newChar>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
-
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    enemyMaterialId: e.enemyMaterialId,
+                    talentMaterialId: e.talentMaterialId,
+                    stars: e.stars,
+                    name: e.name,
+                }
+            }),
             total: charCounter
         }
     },
@@ -150,8 +206,8 @@ export const zzzCharRepository = {
         await zzzRiseDb.deleteOne({ id: +id })
     },
     async getCharStat() {
-        const charsElements = await zzzCharDb.aggregate([{ $group: { _id: { element: "$talentMaterialId", weaponId: "$enemyMaterialId" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
-        const charsRegions = await zzzCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
+        const charsElements = await zzzCharDb.aggregate([{ $group: { _id: { element: "$talentMaterialId", weaponId: "$enemyMaterialId" }, chars: { $push: { id: "$id", img: "$img", stars: "$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const charsRegions = await zzzCharDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img", stars: "$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
         const colElements = await zzzColDb.aggregate([{ $group: { _id: { element: "$talentMaterialId" }, count: { $sum: 1 } } }]).toArray()
         return {
             elements: {

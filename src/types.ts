@@ -8,12 +8,14 @@ export type char = {
     stoneTypeId: number,
     talentMaterialId: number,
     weekBossMaterialId: number,
+    pathId?:number,
     img: string,
     weaponId: number,
     region: number,
     sex: number,
     stars: number,
-    size: number
+    size: number,
+    charInfo?: any
 }
 export type newChar = {
     id: number

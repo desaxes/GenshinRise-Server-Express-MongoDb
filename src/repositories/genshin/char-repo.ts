@@ -4,10 +4,29 @@ import path from 'path'
 
 export const charRepository = {
     async getChars(finalConditions: any, limit: number, offset: number) {
-        const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
-        const chars = await charDb.find<newChar>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
+        const charCounter = (await charDb.find(finalConditions).toArray()).length
+        const chars = await charDb.find(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stoneTypeId: e.stoneTypeId,
+                    weaponId: e.weaponId,
+                    talentMaterialId: e.talentMaterialId,
+                    stars: e.stars,
+                    name: e.name,
+                    charInfo: {
+                        recWeapons: e.charInfo?.recWeapons ? e.charInfo.recWeapons : [],
+                        firstArtSetfirstHalfId: e.charInfo?.firstArtSetfirstHalfId ? e.charInfo.firstArtSetfirstHalfId : 0,
+                        firstArtSetsecondHalfId: e.charInfo?.firstArtSetsecondHalfId ? e.charInfo.firstArtSetsecondHalfId : 0,
+                        secondArtSetfirstHalfId: e.charInfo?.secondArtSetfirstHalfId ? e.charInfo.secondArtSetfirstHalfId : 0,
+                        secondArtSetsecondHalfId: e.charInfo?.secondArtSetsecondHalfId ? e.charInfo.secondArtSetsecondHalfId : 0,
+                        thirdArtSetfirstHalfId: e.charInfo?.thirdArtSetfirstHalfId ? e.charInfo.thirdArtSetfirstHalfId : 0,
+                        thirdArtSetsecondHalfId: e.charInfo?.thirdArtSetsecondHalfId ? e.charInfo.thirdArtSetsecondHalfId : 0
+                    }
+                }
+            }),
             total: charCounter
         }
     },
@@ -15,7 +34,17 @@ export const charRepository = {
         const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
         const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.lastPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        lastPatch: e.charInfo?.lastPatch ? e.charInfo.lastPatch : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -23,7 +52,17 @@ export const charRepository = {
         const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
         const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.patchCounter': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        patchCounter: e.charInfo?.patchCounter ? e.charInfo.patchCounter : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -31,7 +70,17 @@ export const charRepository = {
         const charCounter = (await charDb.find<newChar>(finalConditions).toArray()).length
         const chars = await charDb.find<newChar>(finalConditions).sort({ 'charInfo.firstPatch': -1, stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stars: e.stars,
+                    charInfo: {
+                        firstPatch: e.charInfo?.firstPatch ? e.charInfo.firstPatch : 0
+                    }
+                }
+            }
+            ),
             total: charCounter
         }
     },
@@ -71,9 +120,18 @@ export const charRepository = {
     async getCharsFromCol(finalConditions: any, limit: number, offset: number) {
         const charCounter = (await colDb.find<newChar>(finalConditions).toArray()).length
         const chars = await colDb.find<newChar>(finalConditions).sort({ stars: -1, name: 1 }).skip(offset).limit(limit).toArray()
-
         return {
-            chars: chars,
+            chars: chars.map(e => {
+                return {
+                    id: e.id,
+                    img: e.img,
+                    stoneTypeId: e.stoneTypeId,
+                    weaponId: e.weaponId,
+                    talentMaterialId: e.talentMaterialId,
+                    stars: e.stars,
+                    name: e.name,
+                }
+            }),
             total: charCounter
         }
     },
@@ -207,8 +265,8 @@ export const charRepository = {
         await maxDb.deleteOne({ id: +id })
     },
     async getCharStat() {
-        const charsElements = await charDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$weaponId" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
-        const charsRegions = await charDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img",stars:"$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
+        const charsElements = await charDb.aggregate([{ $group: { _id: { element: "$stoneTypeId", weaponId: "$weaponId" }, chars: { $push: { id: "$id", img: "$img", stars: "$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.weaponId': 1, '_id.element': 1 } }]).toArray()
+        const charsRegions = await charDb.aggregate([{ $group: { _id: { regionId: "$region" }, chars: { $push: { id: "$id", img: "$img", stars: "$stars" } }, count: { $sum: 1 } } }, { $sort: { '_id.regionId': 1 } }]).toArray()
         const colElements = await colDb.aggregate([{ $group: { _id: { element: "$stoneTypeId" }, count: { $sum: 1 } } }]).toArray()
         return {
             elements: {
