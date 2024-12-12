@@ -43,10 +43,15 @@ export const zzzBannerRepository = {
                 patchNumber: data.patchNumber
             })
             if (data.charId1) {
+                const char = await zzzCharDb.findOne({ id: +data.charId1 })
+                let release = (char?.charInfo?.firstPatch &&
+                    char?.charInfo?.firstPatch != 0) ?
+                    char.charInfo.firstPatch : +data.patchNumber
                 await zzzCharDb.updateOne({ id: +data.charId1 },
                     {
                         $set: {
                             'charInfo.lastPatch': +data.patchNumber,
+                            'charInfo.firstPatch': release
                         },
                         $inc: {
                             'charInfo.patchCounter': 1
@@ -55,10 +60,15 @@ export const zzzBannerRepository = {
                 )
             }
             if (data.charId2) {
+                const char = await zzzCharDb.findOne({ id: +data.charId2 })
+                let release = (char?.charInfo?.firstPatch &&
+                    char?.charInfo?.firstPatch != 0) ?
+                    char.charInfo.firstPatch : +data.patchNumber
                 await zzzCharDb.updateOne({ id: +data.charId2 },
                     {
                         $set: {
                             'charInfo.lastPatch': +data.patchNumber,
+                            'charInfo.firstPatch': release
                         },
                         $inc: {
                             'charInfo.patchCounter': 1
@@ -67,10 +77,15 @@ export const zzzBannerRepository = {
                 )
             }
             if (data.epicCharId1) {
+                const char = await zzzCharDb.findOne({ id: +data.epicCharId1 })
+                let release = (char?.charInfo?.firstPatch &&
+                    char?.charInfo?.firstPatch != 0) ?
+                    char.charInfo.firstPatch : +data.patchNumber
                 await zzzCharDb.updateOne({ id: +data.epicCharId1 },
                     {
                         $set: {
                             'charInfo.lastPatch': +data.patchNumber,
+                            'charInfo.firstPatch': release
                         },
                         $inc: {
                             'charInfo.patchCounter': 1
@@ -79,10 +94,15 @@ export const zzzBannerRepository = {
                 )
             }
             if (data.epicCharId2) {
+                const char = await zzzCharDb.findOne({ id: +data.epicCharId2 })
+                let release = (char?.charInfo?.firstPatch &&
+                    char?.charInfo?.firstPatch != 0) ?
+                    char.charInfo.firstPatch : +data.patchNumber
                 await zzzCharDb.updateOne({ id: +data.epicCharId2 },
                     {
                         $set: {
                             'charInfo.lastPatch': +data.patchNumber,
+                            'charInfo.firstPatch': release
                         },
                         $inc: {
                             'charInfo.patchCounter': 1
@@ -91,10 +111,15 @@ export const zzzBannerRepository = {
                 )
             }
             if (data.epicCharId3) {
+                const char = await zzzCharDb.findOne({ id: +data.epicCharId3 })
+                let release = (char?.charInfo?.firstPatch &&
+                    char?.charInfo?.firstPatch != 0) ?
+                    char.charInfo.firstPatch : +data.patchNumber
                 await zzzCharDb.updateOne({ id: +data.epicCharId3 },
                     {
                         $set: {
                             'charInfo.lastPatch': +data.patchNumber,
+                            'charInfo.firstPatch': release
                         },
                         $inc: {
                             'charInfo.patchCounter': 1

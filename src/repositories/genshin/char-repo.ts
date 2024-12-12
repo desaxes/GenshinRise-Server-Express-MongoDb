@@ -282,29 +282,22 @@ export const charRepository = {
         const updated = await charDb.updateOne({ id: +data.id },
             {
                 $set: {
-                    charInfo: {
-                        ownWeaponId: +data.ownWeaponId,
-                        recWeapons: JSON.parse(data.recWeapons),
-                        // recFiveStarWeaponId: +data.recFiveStarWeaponId,
-                        // recFourStarWeaponId: +data.recFourStarWeaponId,
-                        firstArtSetfirstHalfId: +data.firstArtSetfirstHalfId,
-                        firstArtSetSecondHalfId: +data.firstArtSetSecondHalfId,
-                        secondArtSetfirstHalfId: +data.secondArtSetfirstHalfId,
-                        secondArtSetSecondHalfId: +data.secondArtSetSecondHalfId,
-                        thirdArtSetfirstHalfId: +data.thirdArtSetfirstHalfId,
-                        thirdArtSetSecondHalfId: +data.thirdArtSetSecondHalfId,
-                        firstArtProp: JSON.parse(data.firstArtProp),
-                        secondArtProp: JSON.parse(data.secondArtProp),
-                        thirdArtProp: JSON.parse(data.thirdArtProp),
-                        charProps: JSON.parse(data.charProps),
-                        firstTeam: JSON.parse(data.firstTeam),
-                        secondTeam: JSON.parse(data.secondTeam),
-                        thirdTeam: JSON.parse(data.thirdTeam),
-                        firstPatch: +data.firstPatch,
-                        lastPatch: +data.lastPatch,
-                        patchCounter: +data.patchCounter,
-                        info: data.info
-                    }
+                    'charInfo.ownWeaponId': +data.ownWeaponId,
+                    'charInfo.recWeapons': JSON.parse(data.recWeapons),
+                    'charInfo.firstArtSetfirstHalfId': +data.firstArtSetfirstHalfId,
+                    'charInfo.firstArtSetSecondHalfId': +data.firstArtSetSecondHalfId,
+                    'charInfo.secondArtSetfirstHalfId': +data.secondArtSetfirstHalfId,
+                    'charInfo.secondArtSetSecondHalfId': +data.secondArtSetSecondHalfId,
+                    'charInfo.thirdArtSetfirstHalfId': +data.thirdArtSetfirstHalfId,
+                    'charInfo.thirdArtSetSecondHalfId': +data.thirdArtSetSecondHalfId,
+                    'charInfo.firstArtProp': JSON.parse(data.firstArtProp),
+                    'charInfo.secondArtProp': JSON.parse(data.secondArtProp),
+                    'charInfo.thirdArtProp': JSON.parse(data.thirdArtProp),
+                    'charInfo.charProps': JSON.parse(data.charProps),
+                    'charInfo.firstTeam': JSON.parse(data.firstTeam),
+                    'charInfo.secondTeam': JSON.parse(data.secondTeam),
+                    'charInfo.thirdTeam': JSON.parse(data.thirdTeam),
+                    'charInfo.info': data.info
                 }
             }
         )
