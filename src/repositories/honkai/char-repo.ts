@@ -18,11 +18,11 @@ export const honkaiCharRepository = {
                     charInfo: {
                         recWeapons: e.charInfo?.recWeapons ? e.charInfo.recWeapons : [],
                         firstArtSetfirstHalfId: e.charInfo?.firstArtSetfirstHalfId ? e.charInfo.firstArtSetfirstHalfId : 0,
-                        firstArtSetsecondHalfId: e.charInfo?.firstArtSetsecondHalfId ? e.charInfo.firstArtSetsecondHalfId : 0,
+                        firstArtSetSecondHalfId: e.charInfo?.firstArtSetSecondHalfId ? e.charInfo.firstArtSetSecondHalfId : 0,
                         secondArtSetfirstHalfId: e.charInfo?.secondArtSetfirstHalfId ? e.charInfo.secondArtSetfirstHalfId : 0,
-                        secondArtSetsecondHalfId: e.charInfo?.secondArtSetsecondHalfId ? e.charInfo.secondArtSetsecondHalfId : 0,
+                        secondArtSetSecondHalfId: e.charInfo?.secondArtSetSecondHalfId ? e.charInfo.secondArtSetSecondHalfId : 0,
                         thirdArtSetfirstHalfId: e.charInfo?.thirdArtSetfirstHalfId ? e.charInfo.thirdArtSetfirstHalfId : 0,
-                        thirdArtSetsecondHalfId: e.charInfo?.thirdArtSetsecondHalfId ? e.charInfo.thirdArtSetsecondHalfId : 0,
+                        thirdArtSetSecondHalfId: e.charInfo?.thirdArtSetSecondHalfId ? e.charInfo.thirdArtSetSecondHalfId : 0,
                         firstPlanarSetId: e.charInfo?.firstPlanarSetId ? e.charInfo.firstPlanarSetId : 0,
                         secondPlanarSetId: e.charInfo?.secondPlanarSetId ? e.charInfo.secondPlanarSetId : 0,
                         thirdPlanarSetId: e.charInfo?.thirdPlanarSetId ? e.charInfo.thirdPlanarSetId : 0

@@ -102,25 +102,39 @@ export const zzzRollRepository = {
     },
     async getEventRollsForBanner(finalConditions: any, limit: number, offset: number, year: number, lmonth: number, lday: number, hmonth: number, hday: number) {
         // const rollCounter = (await erollDb.find<newRollType>(finalConditions).toArray()).length
-        const rolls = await zzzErollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
-        const rollCounter = await zzzErollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [3, 4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        const rolls = await zzzErollDb.find({ month: { $in: [lmonth, hmonth] }, stars: { $in: [4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        const rollCounter = await zzzErollDb.find({ month: { $in: [lmonth, hmonth] }, stars: { $in: [3, 4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
         let sort
         let sortCounter
         if (lmonth === hmonth) {
-            sort = rolls.filter(e => e.day >= lday && e.day <= hday)
+            sort = rolls.filter(e => e.day >= lday && e.day <= hday && e.year === year)
         }
         else {
-            const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday)
-            const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday)
-            sort = rolls1.concat(rolls2)
+            if (hmonth != 1) {
+                const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday && e.year === year)
+                sort = rolls1.concat(rolls2)
+            }
+            else {
+                const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday && e.year === (year + 1))
+                sort = rolls1.concat(rolls2)
+            }
         }
         if (lmonth === hmonth) {
-            sortCounter = rollCounter.filter(e => e.day >= lday && e.day <= hday)
+            sortCounter = rollCounter.filter(e => e.day >= lday && e.day <= hday && e.year === year)
         }
         else {
-            const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday)
-            const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday)
-            sortCounter = rolls1.concat(rolls2)
+            if (hmonth != 1) {
+                const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday && e.year === year)
+                sortCounter = rolls1.concat(rolls2)
+            }
+            else {
+                const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday && e.year === (year + 1))
+                sortCounter = rolls1.concat(rolls2)
+            }
         }
         return {
             rolls: sort,
@@ -129,25 +143,39 @@ export const zzzRollRepository = {
     },
     async getWeaponRollsForBanner(finalConditions: any, limit: number, offset: number, year: number, lmonth: number, lday: number, hmonth: number, hday: number) {
         // const rollCounter = (await erollDb.find<newRollType>(finalConditions).toArray()).length
-        const rolls = await zzzWrollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
-        const rollCounter = await zzzWrollDb.find({ year: year, month: { $in: [lmonth, hmonth] }, stars: { $in: [3, 4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        const rolls = await zzzWrollDb.find({ month: { $in: [lmonth, hmonth] }, stars: { $in: [4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
+        const rollCounter = await zzzWrollDb.find({ month: { $in: [lmonth, hmonth] }, stars: { $in: [3, 4, 5] } }).sort({ stars: -1, isChar: -1, rewardId: -1 }).skip(offset).limit(limit).toArray()
         let sort
         let sortCounter
         if (lmonth === hmonth) {
-            sort = rolls.filter(e => e.day >= lday && e.day <= hday)
+            sort = rolls.filter(e => e.day >= lday && e.day <= hday && e.year === year)
         }
         else {
-            const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday)
-            const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday)
-            sort = rolls1.concat(rolls2)
+            if (hmonth != 1) {
+                const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday && e.year === year)
+                sort = rolls1.concat(rolls2)
+            }
+            else {
+                const rolls1 = rolls.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rolls.filter(e => e.month === hmonth && e.day <= hday && e.year === (year + 1))
+                sort = rolls1.concat(rolls2)
+            }
         }
         if (lmonth === hmonth) {
-            sortCounter = rollCounter.filter(e => e.day >= lday && e.day <= hday)
+            sortCounter = rollCounter.filter(e => e.day >= lday && e.day <= hday && e.year === year)
         }
         else {
-            const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday)
-            const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday)
-            sortCounter = rolls1.concat(rolls2)
+            if (hmonth != 1) {
+                const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday && e.year === year)
+                sortCounter = rolls1.concat(rolls2)
+            }
+            else {
+                const rolls1 = rollCounter.filter(e => e.month === lmonth && e.day >= lday && e.year === year)
+                const rolls2 = rollCounter.filter(e => e.month === hmonth && e.day <= hday && e.year === (year + 1))
+                sortCounter = rolls1.concat(rolls2)
+            }
         }
         return {
             rolls: sort,
